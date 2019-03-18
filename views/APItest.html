@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>API Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{
+      background: #fefefe
+    }
+    .container{
+      height: 600px;
+      width: 90%;
+      margin:  auto;
+      /* background: #ccc; */
+    }
+    .container .row{
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 60px;
+      width: 100%
+    }
+    #method{
+      width: 20%;
+      height: 40px;
+      outline: none;
+    }
+    #url{
+      width: 80%;
+      height: 35px;
+      outline: none;
+    }
+    #parameters{
+      height: 200px;
+      width: 99%
+    }
+    #btn{
+      width: 60%;
+      height: 40px;
+      background: #66ff;
+      border: none;
+      outline: none;
+      color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #aaa;
+      cursor: pointer;
+    }
+    #btn:hover{
+      background: #6666ffe1;
+      box-shadow: 0 0 40px #aaa;
+    }
+  </style>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>API 测试</h1>
+    <div class="row">
+      <select name="method" id="method">
+        <option value="GET"  selected="selected">GET</option>
+        <option value="POST">POST</option>
+        <option value="PUT">PUT</option>
+        <option value="DELETE">DELETE</option>
+      </select>
+      <input type="text" id="url" placeholder="请输入请求地址">
+    </div>
+    <textarea id="parameters" placeholder="参数列表"></textarea>
+    <div class="row">
+      <button id="btn">获取响应</button>
+    </div>
+  </div>
+  <script>
+  window.onload = function () {
+    let btn = document.getElementById('btn')
+    let result = document.getElementById('result')
+    btn.onclick = function (){
+      let method = document.getElementById('method').value
+      let url = document.getElementById('url').value
+      let parameters = document.getElementById('parameters').value == ""? "" : JSON.parse(document.getElementById('parameters').value)
+      console.log(parameters)
+      if(url) {
+        let options = {
+          method,
+          url,
+          parameters
+        }
+        console.log(options)
+        axios({
+          method,
+          url,
+          data: parameters,
+        }).then(res => {
+          console.log('success')
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+    }
+}
+  </script>
+</body>
+</html>
