@@ -1,0 +1,25 @@
+{
+  "name": "will-server",
+  "version": "1.0.0",
+  "description": "will-server",
+  "main": "app.js",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niuyi1017/will-server.git"
+  },
+  "author": "niuxinyu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/niuyi1017/will-server/issues"
+  },
+  "homepage": "https://github.com/niuyi1017/will-server#readme"
+}
