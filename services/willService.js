@@ -81,88 +81,100 @@ module.exports = {
     ]
     return hotArticles
   },
-  recommedArticles: () => {
-    let recommedArticles = [
-      {
-        "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-        "author": "一只小小白",
-        "title": "在距海最近的大学读书是怎样的体验",
-        "like": "1234",
-        "comment": "123",
-        "read": "3.4k"
-      },
-      {
-        "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-        "author": "一只小小白",
-        "title": "在距海最近的大学读书是怎样的体验在距海最近的大学读书",
-        "like": "1234",
-        "comment": "123",
-        "read": "3.4k"
-      },
-      {
-        "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-        "author": "一只小小白",
-        "title": "在距海最近的大学读书是怎样的体验",
-        "like": "1234",
-        "comment": "123",
-        "read": "3.4k"
-      },
-      {
-        "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-        "author": "一只小小白",
-        "title": "在距海最近的大学读书是怎样的体验读书是怎样的体验",
-        "like": "1234",
-        "comment": "123",
-        "read": "3.4k"
-      }
-    ]
+  recommedArticles: (uid) => {
+    let recommedArticles = []
+    if(uid){
+      recommedArticles = [
+        {
+          "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
+          "author": "一只小小白",
+          "title": "在距海最近的大学读书是怎样的体验",
+          "like": "1234",
+          "comment": "123",
+          "read": "3.4k"
+        },
+        {
+          "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
+          "author": "一只小小白",
+          "title": "在距海最近的大学读书是怎样的体验在距海最近的大学读书",
+          "like": "1234",
+          "comment": "123",
+          "read": "3.4k"
+        },
+        {
+          "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
+          "author": "一只小小白",
+          "title": "在距海最近的大学读书是怎样的体验",
+          "like": "1234",
+          "comment": "123",
+          "read": "3.4k"
+        },
+        {
+          "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
+          "author": "一只小小白",
+          "title": "在距海最近的大学读书是怎样的体验读书是怎样的体验",
+          "like": "1234",
+          "comment": "123",
+          "read": "3.4k"
+        }
+      ]
+    }else{
+      recommedArticles = []
+    }
     return recommedArticles
   },
-  recommendPeople: () => {
-    let recommendPeople = [
-      {
-        "avatar":"http://blogpic.niuy.xyz/t1.jpg",
-        "name": "一只小小白",
-        "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-        "isFriend": false
-      },
-      {
-        "avatar": "http://blogpic.niuy.xyz/t2.jpg",
-        "name": "一只小小白",
-        "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-        "isFriend": false
-      },
-      {
-        "avatar": "http://blogpic.niuy.xyz/t3.jpg",
-        "name": "一只小小白",
-        "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-        "isFriend": false
-      },
-      {
-        "avatar": "http://blogpic.niuy.xyz/t1.jpg",
-        "name": "一只小小白",
-        "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-        "isFriend": false
-      },
-      {
-        "avatar": "http://blogpic.niuy.xyz/t2.jpg",
-        "name": "一只小小白",
-        "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-        "isFriend": false
-      },
-      {
-        "avatar": "http://blogpic.niuy.xyz/t3.jpg",
-        "name": "一只小小白",
-        "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-        "isFriend": false
-      },
-      {
-        "avatar": "http://blogpic.niuy.xyz/t1.jpg",
-        "name": "一只小小白",
-        "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-        "isFriend": false
-      }
-    ]
+  recommendPeople: (uid) => {
+    let recommendPeople = []
+    if(uid){
+      recommendPeople = [
+        {
+          "avatar": "http://blogpic.niuy.xyz/t1.jpg",
+          "name": "一只小小白",
+          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
+          "isFriend": false
+        },
+        {
+          "avatar": "http://blogpic.niuy.xyz/t2.jpg",
+          "name": "一只小小白",
+          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
+          "isFriend": false
+        },
+        {
+          "avatar": "http://blogpic.niuy.xyz/t3.jpg",
+          "name": "一只小小白",
+          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
+          "isFriend": false
+        },
+        {
+          "avatar": "http://blogpic.niuy.xyz/t1.jpg",
+          "name": "一只小小白",
+          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
+          "isFriend": false
+        },
+        {
+          "avatar": "http://blogpic.niuy.xyz/t2.jpg",
+          "name": "一只小小白",
+          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
+          "isFriend": false
+        },
+        {
+          "avatar": "http://blogpic.niuy.xyz/t3.jpg",
+          "name": "一只小小白",
+          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
+          "isFriend": false
+        },
+        {
+          "avatar": "http://blogpic.niuy.xyz/t1.jpg",
+          "name": "一只小小白",
+          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
+          "isFriend": false
+        }
+      ]
+    }
+    else{
+      recommendPeople = []
+    }
+    
     return recommendPeople 
-  } 
+  }
 }

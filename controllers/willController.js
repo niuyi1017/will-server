@@ -17,7 +17,8 @@ module.exports = {
     }
   },
   recommendArticles: async (ctx, next) => {
-    let data = await willService.recommedArticles()
+    let uid = ctx.request.query.uid
+    let data = await willService.recommedArticles(uid)
     await next()
     ctx.response.body = {
       code: 0,
@@ -25,11 +26,26 @@ module.exports = {
     }
   },
   recommendPeople: async (ctx, next) => {
-    let data = await willService.recommendPeople()
+    let uid = ctx.request.query.uid
+    let data = await willService.recommendPeople(uid)
     await next()
     ctx.response.body = {
       code: 0,
       data
     }
-  }
+  },
+  will: async (ctx, next) => {
+    uid = ctx.request.query.uid
+    let data = {
+      slideShows: await willService.slideShows(),
+      recommendPeople: await willService.recommendPeople(uid),
+      recommedArticles: await willService.recommedArticles(uid),
+      hotArticles: await willService.hotArticles()
+    }
+    await next()
+    ctx.response.body = {
+      code: 0,
+      data
+    }
+  },
 }

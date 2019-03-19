@@ -1,9 +1,13 @@
 const willController = require('../controllers/willController')
+const userController = require('../controllers/userController')
 const Router = require('koa-router')
 const router = new Router()
 
 router.get('/slideShows', willController.slideShows)
-router.get('/hotArticles', willController.hotArticles)
-router.get('/recommendArticles', willController.recommendArticles)
-router.get('/recommendPeople', willController.recommendPeople)
+  .get('/hotArticles', willController.hotArticles)
+  .get('/recommendArticles', willController.recommendArticles)
+  .get('/recommendPeople', willController.recommendPeople)
+  .get('/will', willController.will)
+
+router.post('/signUp', userController.signUp)
 module.exports  = router
