@@ -1,8 +1,15 @@
 module.exports = {
- signUp : async (username, passworld) => {
+  signUp: async (username, passworld, confirmPassword) => {
    return {
      username,
-     passworld
+     passworld,
+     confirmPassword
    }
- }
+ },
+ signIn: async (username, passworld) => {
+    return {
+      username,
+      passworld
+    }
+  }
 }

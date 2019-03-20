@@ -1,51 +1,97 @@
 const willService = require('../services/willService')
 module.exports = {
   slideShows: async (ctx, next) => {
-    let data = await willService.slideShows()
-    await next()
+    let code = 0
+    let message = "success"
+    let data = {}
+    try {
+      data = await willService.slideShows()
+      await next()
+    } catch (error) {
+      code = 0
+      message = error.message
+    }
     ctx.response.body = {
-      code: 0,
+      code,
+      message,
       data
     }
   },
   hotArticles: async (ctx, next) => {
-    let data = await willService.hotArticles()
-    await next()
+    let code = 0
+    let message = "success"
+    let data = {}
+    try {
+      data = await willService.hotArticles()
+      await next()
+    } catch (error) {
+      code = 0
+      message = error.message
+    }
     ctx.response.body = {
-      code: 0,
+      code,
+      message,
       data
     }
   },
   recommendArticles: async (ctx, next) => {
     let uid = ctx.request.query.uid
-    let data = await willService.recommedArticles(uid)
-    await next()
+    let code = 0
+    let message = "success"
+    let data = {}
+    try {
+      data = await willService.recommedArticles(uid)
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
+    }
     ctx.response.body = {
-      code: 0,
+      code,
+      message,
       data
     }
+    
   },
   recommendPeople: async (ctx, next) => {
     let uid = ctx.request.query.uid
-    let data = await willService.recommendPeople(uid)
-    await next()
+    let code = 0
+    let message = "success"
+    let data = {}
+    try {
+      data = await willService.recommendPeople(uid)
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
+    }
     ctx.response.body = {
-      code: 0,
-      data
+      code,
+      data,
+      message
     }
   },
   will: async (ctx, next) => {
-    uid = ctx.request.query.uid
-    let data = {
-      slideShows: await willService.slideShows(),
-      recommendPeople: await willService.recommendPeople(uid),
-      recommedArticles: await willService.recommedArticles(uid),
-      hotArticles: await willService.hotArticles()
+    let uid = ctx.request.query.uid
+    let code = 0
+    let message = "success"
+    let data = []
+    try {
+      data = {
+        slideShows: await willService.slideShows(),
+        recommendPeople: await willService.recommendPeople(uid),
+        recommedArticles: await willService.recommedArticles(uid),
+        hotArticles: await willService.hotArticles()
+      }
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
     }
-    await next()
     ctx.response.body = {
-      code: 0,
-      data
+      code,
+      data,
+      message
     }
   },
 }
