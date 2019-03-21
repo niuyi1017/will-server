@@ -13,4 +13,7 @@ router.get('/slideShows', willController.slideShows)
 //user page
 router.post('/signUp', userController.signUp)
   .post('/signIn', userController.signIn)
+//school info
+
+router.get('/school',userController.school)
 module.exports  = router
