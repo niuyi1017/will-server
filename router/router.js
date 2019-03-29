@@ -1,5 +1,6 @@
 const willController = require('../controllers/willController')
 const userController = require('../controllers/userController')
+const schoolController = require('../controllers/schoolController')
 const Router = require('koa-router')
 const router = new Router()
 
@@ -13,8 +14,8 @@ router.get('/slideShows', willController.slideShows)
 //user page
 router.post('/signUp', userController.signUp)
   .post('/signIn', userController.signIn)
-//school info
 
-router.get('/school',userController.school)
-router.get('/allSchool', userController.allSchool)
+//school info
+router.get('/school', schoolController.school)
+router.get('/allSchool', schoolController.allSchool)
 module.exports  = router

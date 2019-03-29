@@ -8,7 +8,7 @@ const app = new Koa()
 app.use(bodyParser())
    .use(router.routes())
    .use(router.allowedMethods())
-   .use(serve(__dirname + '/views'));
+   .use(serve(__dirname + '/views'))
 
 app.listen(3000, () => {
   console.log('will-server is running at http://localhost:3000')

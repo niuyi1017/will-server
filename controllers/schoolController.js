@@ -1,30 +1,29 @@
-const userService = require('../services/userService')
+const schoolService = require('../services/schoolService')
 module.exports = {
-  signUp: async (ctx, next) => {
-    let {username, password,confirmPassword} = ctx.request.body
+  school: async (ctx, next) => {
     let code = 0
     let message = 'success'
-    let result = [] 
+    let result = {}
     try {
-      result = await userService.signUp(username, password, confirmPassword)
+      result = await schoolService.school()
       await next()
     } catch (error) {
       code = 1
       message = error.message
-    } 
+    }
     ctx.response.body = {
       code,
       data: result,
       message
     }
   },
-  signIn: async (ctx, next) => {
-    let { username, password } = ctx.request.body
+  allSchool: async (ctx, next) => {
+    console.log('controller')
     let code = 0
     let message = 'success'
-    let result = []
+    let result = {}
     try {
-      result = await userService.signIn(username, password)
+      result = await schoolService.allSchool()
       await next()
     } catch (error) {
       code = 1
