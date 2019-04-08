@@ -2,13 +2,13 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 const schoolSchema = new Schema({
-  schoolId: {
+  school_id: {
     type: String,
     unique:true
   },
   is211: Boolean,
   is985: Boolean,
-  isDual_class: Boolean,
+  isDual_class: String,
   logo: String,
   name: String,
   type: String,

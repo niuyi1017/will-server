@@ -1,5 +1,7 @@
 const axios = require('axios')
+const mongoose = require('mongoose')
 const allSchool = require('../dao/getAllSchool')
+
 module.exports = {
   school: async () => {
     let uri = {
@@ -15,6 +17,11 @@ module.exports = {
       .then(res => {
         return Promise.resolve(res.data)
       })
+  },
+  schoollist: async() => {
+    const School = mongoose.model('School')
+    let result = await School.find({}).limit(100)
+    return result
   },
   allSchool: async () => {
     let result = await allSchool.allSchool()

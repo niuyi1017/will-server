@@ -17,5 +17,7 @@ router.post('/signUp', userController.signUp)
 
 //school info
 router.get('/school', schoolController.school)
+  .get('/schoollist', schoolController.schoollist)
 router.get('/allSchool', schoolController.allSchool)
+
 module.exports  = router
