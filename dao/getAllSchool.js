@@ -1,5 +1,6 @@
 const axios = require('axios')
-
+const mongoose = require('mongoose')
+// const School = mongoose.model('School')
 function getSchool(page){
     let uri = {
       page,
@@ -24,7 +25,7 @@ function getSchool(page){
 }
 function filterSchoolData(school){
   return {
-    id:school.school_id,
+    school_id:school.school_id,
     name:school.name,
     is211: school.f211 == 1 ? true: false,
     is985: school.f985 == 1 ? true : false,
@@ -35,10 +36,23 @@ function filterSchoolData(school){
 }
 function getAllPageDataAsync(){
   let getAllPageData = []
-  for (let i = 0; i < 5; i++) {
+  for (let i = 120; i < 144; i++) {
     getAllPageData.push(getSchool(i))
   }
   return getAllPageData
+}
+async function writeDatebase(schoolData) {
+  const School = mongoose.model('School')
+  try {
+    let school = await School.findOne({ school_id: schoolData.school_id })
+    if (!school) {
+      school = new School(schoolData)
+      await school.save()
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  
 }
 
 module.exports = {
@@ -51,7 +65,8 @@ module.exports = {
           let schools = page.data.item
           schools.forEach(school => {
             let schoolData = filterSchoolData(school)
-            //Todo 写入数据库
+            //Todo 写入数据库  
+            writeDatebase(schoolData)
             pageData.push(schoolData)
           });
         })
