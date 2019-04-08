@@ -1,10 +1,10 @@
-const User = require('../models/user')
+// const User = require('../models/user')
 module.exports = {
   signUp: async (user) => {
-    console.log(user.username)
-    let user1 = new User(user)
-    console.log(user1)
-    return user1
+    // console.log(user.username)
+    // let user1 = new User(user)
+    // console.log(user1)
+    // return user1
     // try {
     //   let _user = await User.findOne({ username: user.username })
     //   if(_user){
