@@ -11,15 +11,9 @@ const router = require('./router/router')
   await connect()
   initSchema()
    
-  // const School = mongoose.model('School')
-  // const schools = await School.find({})
-  // console.log(schools)
 })()
 
 let port = process.env.port || 3000
-// let env = process.env.NODE_ENV || 'development'
-// let dbUrl = 'mongodb://127.0.0.1/test'
-
 const app = new Koa()
 app.use(bodyParser())
    .use(router.routes())
