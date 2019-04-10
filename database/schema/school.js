@@ -12,7 +12,8 @@ const schoolSchema = new Schema({
   logo: String,
   name: String,
   type: String,
-
+  rank: Number,  
+  
   desc: String,
   pics: [String],
   summary: String,
@@ -38,9 +39,11 @@ const schoolSchema = new Schema({
 
 schoolSchema.pre('save', function (next) {
   if (this.isNew) {
+    console.log('isnew')
     this.meta.createdAt = this.meta.updatedAt = Date.now()
   } else {
-    this.updatedAt = Date.now()
+    console.log('!isnew')
+    this.meta.updatedAt = Date.now()
   }
   next()
 })

@@ -13,11 +13,12 @@ router.get('/slideShows', willController.slideShows)
   
 //user page
 router.post('/signUp', userController.signUp)
-  .post('/signIn', userController.signIn)
+      .post('/signIn', userController.signIn)
 
 //school info
-router.get('/school', schoolController.school)
-  .get('/schoollist', schoolController.schoollist)
-router.get('/allSchool', schoolController.allSchool)
+router.get('/school/:school_id', schoolController.school)
+      .get('/school/detail/:school_id',schoolController.schoolDetail)
+      .get('/schools', schoolController.schools)
+router.get('/allSchool', schoolController.allSchool)  //爬取所有学校信息并写入数据库
 
 module.exports  = router
