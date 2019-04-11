@@ -20,5 +20,7 @@ router.get('/school/:school_id', schoolController.school)
       .get('/school/detail/:school_id',schoolController.schoolDetail)
       .get('/schools', schoolController.schools)
 router.get('/allSchool', schoolController.allSchool)  //爬取所有学校信息并写入数据库
+//special 
 
+router.get('/allSpecial', schoolController.allSpecial)
 module.exports  = router

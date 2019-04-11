@@ -3,12 +3,12 @@ const axios = require('axios')
 
 function getSchoolBaseInfo(school_id) {
   let url = `https://gkcx.eol.cn/www/school/${school_id}/info.json`
-  let header = {
+  let headers = {
     "Content-Type": "application/json;charset=utf-8",
     "Referer": `https://gkcx.eol.cn/school/${school_id}`
   }
   return new Promise((resolve,reject) => {
-    axios.get(url, { header })
+    axios.get(url, { headers })
       .then((res) => {
         return resolve(res.data)
       }).catch((err) => {

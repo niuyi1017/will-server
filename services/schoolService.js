@@ -1,5 +1,6 @@
-const axios = require('axios')
+// const axios = require('axios')
 const allSchool = require('../dao/getAllSchool')
+const allSpecial = require('../dao/getAllSpecial')
 const school = require('../dao/school')
 
 module.exports = {
@@ -17,6 +18,10 @@ module.exports = {
   },
   allSchool: async () => {
     let result = await allSchool.allSchool()
+    return result
+  },
+  allSpecial: async () => {
+    let result = await allSpecial.allSpecial()
     return result
   }
 }
