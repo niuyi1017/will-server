@@ -1,4 +1,3 @@
-const axios = require('axios')
 const allSchool = require('../dao/getAllSchool')
 const school = require('../dao/school')
 

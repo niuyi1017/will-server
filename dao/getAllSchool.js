@@ -38,7 +38,7 @@ function filterSchoolData(school){
 }
 function getAllPageDataAsync(){
   let getAllPageData = []
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 20; i++) {
     getAllPageData.push(getSchool(i))
   }
   return getAllPageData

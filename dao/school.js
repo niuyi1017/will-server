@@ -3,12 +3,12 @@ const axios = require('axios')
 
 function getSchoolBaseInfo(school_id) {
   let url = `https://gkcx.eol.cn/www/school/${school_id}/info.json`
-  let header = {
+  let headers = {
     "Content-Type": "application/json;charset=utf-8",
     "Referer": `https://gkcx.eol.cn/school/${school_id}`
   }
   return new Promise((resolve,reject) => {
-    axios.get(url, { header })
+    axios.get(url, { headers })
       .then((res) => {
         return resolve(res.data)
       }).catch((err) => {
@@ -46,6 +46,22 @@ function getProvinceSchool(province_id, school_id) {
       });
   })
 }
+function getSchoolSpecials(school_id) {
+  let url = `https://gkcx.eol.cn/www/school/${school_id}/pc_special.json`
+  let headers = {
+    "Content-Type": "application/json;charset=utf-8",
+    "Referer": `https://gkcx.eol.cn/school/${school_id}`,
+    "Host": "gkcx.eol.cn"
+  }
+  return new Promise((resolve, reject) => {
+    axios.get(url, { headers })
+      .then((res) => {
+        return resolve(res.data)
+      }).catch((err) => {
+        return reject(res.data)
+      });
+  })
+}
 
 module.exports = {
   school: async (school_id) => {
@@ -57,6 +73,7 @@ module.exports = {
     let result = {}
     result.baseInfo = await getSchoolBaseInfo(school_id)
     result.newsList = await getSchoolNewsList(school_id)
+    result.specials = await getSchoolSpecials(school_id)
     result.provinceSchool = await getProvinceSchool(result.baseInfo.province_id,school_id)
     return result
   },
