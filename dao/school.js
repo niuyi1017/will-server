@@ -12,7 +12,7 @@ function getSchoolBaseInfo(school_id) {
       .then((res) => {
         return resolve(res.data)
       }).catch((err) => {
-        return reject(res.data)
+        return reject(err)
       });
   })
 }
@@ -27,7 +27,7 @@ function getSchoolNewsList(school_id) {
       .then((res) => {
         return resolve(res.data)
       }).catch((err) => {
-        return reject(res.data)
+        return reject(err)
       });
   })
 }
@@ -42,23 +42,104 @@ function getProvinceSchool(province_id, school_id) {
       .then((res) => {
         return resolve(res.data)
       }).catch((err) => {
-        return reject(res.data)
+        return reject(err)
       });
   })
 }
-function getSchoolSpecials(school_id) {
+function getSchoolSpecials(school_id,detail) {
   let url = `https://gkcx.eol.cn/www/school/${school_id}/pc_special.json`
   let headers = {
     "Content-Type": "application/json;charset=utf-8",
     "Referer": `https://gkcx.eol.cn/school/${school_id}`,
     "Host": "gkcx.eol.cn"
   }
+  if(detail){
+    return new Promise((resolve, reject) => {
+      axios.get(url, { headers })
+        .then((res) => {
+          return resolve(res.data.special_detail)
+        }).catch((err) => {
+          return reject(err)
+        });
+    })
+  }else{
+    return new Promise((resolve, reject) => {
+      axios.get(url, { headers })
+        .then((res) => {
+          let result = {}
+          result.specials = res.data[1]
+          result.classSpecial = res.data.special_detail[4]
+          return resolve(result)
+        }).catch((err) => {
+          return reject(err)
+        });
+    })
+  }
+  
+}
+function getSchoolByRank(rank, province_id, subject_id) {
+  console.log(rank, province_id, subject_id)
+  if (!province_id){
+    province_id = 37
+  }
+  if(!subject_id){
+    subject_id = 1
+  }
+  console.log(rank, province_id, subject_id)
+  let url = `https://g.eol.cn/zsgk/api`
+  let headers = {
+    "Content-Type": "application/json;charset=utf-8",
+    "Referer": `https://g.eol.cn/choose/school/rank`,
+    "Host": "g.eol.cn",
+    "Origin": "https://g.eol.cn",
+  }
+  let data = {
+    "local_province_id":province_id,
+    "local_type_id": subject_id,
+    "page":0,
+    "request_type":2,
+    "size":20,
+    "total": rank,
+    "uri": "gksjk/api/school/totallists"
+  }
   return new Promise((resolve, reject) => {
-    axios.get(url, { headers })
+    axios.post(url, { headers, data })
       .then((res) => {
-        return resolve(res.data)
+        return resolve(res.data.data.item)
       }).catch((err) => {
-        return reject(res.data)
+        return reject(err)
+      });
+  })
+}
+function getSchoolByScore(score, province_id, subject_id ) {
+  if (!province_id) {
+    province_id = 37
+  }
+  if (!subject_id) {
+    subject_id = 1
+  }
+  let url = `https://g.eol.cn/zsgk/api`
+  let headers = {
+    "Content-Type": "application/json;charset=utf-8",
+    "Referer": `https://g.eol.cn/choose/school/rank`,
+    "Host": "g.eol.cn",
+    "Origin": "https://g.eol.cn",
+  }
+  let data = {
+    "local_province_id": province_id,
+    "local_type_id": subject_id,
+    "page": 1,
+    "request_type": 2,
+    "size": 20,
+    score,
+    "uri": "gksjk/api/school/gufenlists"
+  }
+  return new Promise((resolve, reject) => {
+    axios.post(url, { headers, data })
+      .then((res) => {
+        return resolve(res.data.data.item)
+      }).catch((err) => {
+        return reject(err)
       });
   })
 }
@@ -66,7 +147,7 @@ function getSchoolSpecials(school_id) {
 module.exports = {
   school: async (school_id) => {
     const School = mongoose.model('School')
-    let result = await School.find({ school_id: school_id})
+    let result = await School.findOne({ school_id: school_id})
     return result
   },
   schoolDetail: async (school_id) => {
@@ -84,5 +165,17 @@ module.exports = {
                               .limit(num)
                               .sort({rank:1})
     return result
-  }
+  },
+  specials: async (school_id) => {
+    let result = await getSchoolSpecials(school_id,true)
+    return result
+  },
+  getSchoolByRank: async (rank, province_id, subject_id) => {
+    let result = await getSchoolByRank(rank, province_id, subject_id)
+    return result
+  },
+  getSchoolByScore: async (score, province_id, subject_id ) => {
+    let result = await getSchoolByScore(score, province_id, subject_id )
+    return result
+  },
 }

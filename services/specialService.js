@@ -14,6 +14,10 @@ module.exports = {
     let result = special.specials(page, num)
     return result
   },
+  specialSchools: async (special_id,page, num) => {
+    let result = special.specialSchools(special_id,page, num)
+    return result
+  },
   allSpecial: async () => {
     let result = await allSpecial.allSpecial()
     return result

@@ -63,6 +63,66 @@ module.exports = {
       message
     }
   },
+  schoolSpecials: async (ctx, next) => {
+    console.log('controller')
+    let code = 0
+    let message = 'success'
+    let result = {}
+    let school_id = ctx.params.school_id
+    try {
+      result = await schoolService.schoolSpecials(school_id)
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
+    }
+    ctx.response.body = {
+      code,
+      data: result,
+      message
+    }
+  },
+  getSchoolByRank: async (ctx, next) => {
+    let code = 0
+    let message = 'success'
+    let result = {}
+    let rank = parseInt(ctx.request.query.rank)
+    let province_id = parseInt(ctx.request.query.province_id)
+    let subject_id = parseInt(ctx.request.query.subject_id)
+    console.log(rank, province_id, subject_id)
+    try {
+      result = await schoolService.getSchoolByRank(rank, province_id, subject_id)
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
+    }
+    ctx.response.body = {
+      code,
+      data: result,
+      message
+    }
+  },
+  getSchoolByScore: async (ctx, next) => {
+    let code = 0
+    let message = 'success'
+    let result = {}
+    let score = parseInt(ctx.request.query.score)
+    let province_id = parseInt(ctx.request.query.province_id)
+    let subject_id = parseInt(ctx.request.query.subject_id)
+    try {
+      result = await schoolService.getSchoolByScore(score, province_id, subject_id )
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
+    }
+    ctx.response.body = {
+      code,
+      data: result,
+      message
+    }
+  },
   allSchool: async (ctx, next) => {
     console.log('controller')
     let code = 0
@@ -81,22 +141,4 @@ module.exports = {
       message
     }
   },
-  allSpecial: async (ctx, next) => {
-    console.log('controller')
-    let code = 0
-    let message = 'success'
-    let result = {}
-    try {
-      result = await schoolService.allSpecial()
-      await next()
-    } catch (error) {
-      code = 1
-      message = error.message
-    }
-    ctx.response.body = {
-      code,
-      data: result,
-      message
-    }
-  }
 }
