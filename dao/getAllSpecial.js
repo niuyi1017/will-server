@@ -27,7 +27,6 @@ function getSchool(page) {
   })
 }
 function filterSchoolData(special) {
-  // console.log(school)
   return {
     special_id: special.special_id,
     special_name: special.name,
@@ -44,7 +43,7 @@ function filterSchoolData(special) {
 }
 function getAllPageDataAsync() {
   let getAllPageData = []
-  for (let i = 40; i < 67; i++) {
+  for (let i = 0; i < 20; i++) {
     getAllPageData.push(getSchool(i))
   }
   return getAllPageData
@@ -57,10 +56,6 @@ async function writeDatebase(specialData) {
       special = new Special(specialData)
       await special.save()
     }
-    // if (school) {
-    //   school.rank = schoolData.rank
-    //   await school.save()
-    // }
   } catch (error) {
     console.log(error)
   }
