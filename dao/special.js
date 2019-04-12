@@ -16,7 +16,15 @@ function getSpecialDetail(special_id) {
       });
   })
 }
-function getSpecialSchool(special_id) {
+function getSpecialSchool(special_id, page, size) {
+ 
+  if(!page){
+    page= 0
+  }
+  if(!size){
+    size = 20
+  }
+  console.log(page, size)
   let url = `https://gkcx.eol.cn/api`
   let header = {
     "Content-Type": "application/json;charset=utf-8",
@@ -25,10 +33,10 @@ function getSpecialSchool(special_id) {
     "Origin": "https://gkcx.eol.cn"
   }
   let params = {
-      page:1,
+      page,
       request_type:1,
-      size:20,
-      special_id:"4",
+      size,
+      special_id,
       uri:"hxsjkqt/api/gk/schoolSpecial/lists"
   }
   return new Promise((resolve, reject) => {
@@ -52,9 +60,9 @@ async function filterSpecialDetail(special_id){
   }
   return result
 }
-async function filterSpecialSchool(special_id) {
+async function filterSpecialSchool(special_id,page,num) {
   let result = {}
-  let data = await getSpecialSchool(special_id)
+  let data = await getSpecialSchool(special_id,page,num)
   result = data.data.item
   return result
 }
@@ -77,5 +85,9 @@ module.exports = {
       .limit(num)
       .sort({ level3: 1 })  
     return result
-  }
+  },
+  specialSchools: async (special_id, page, num) => {
+    let result = await filterSpecialSchool(special_id,page,num)
+    return result
+  },
 }

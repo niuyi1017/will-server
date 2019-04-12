@@ -63,6 +63,35 @@ module.exports = {
       message
     }
   },
+  specialSchools: async (ctx, next) => {
+    console.log('controller')
+    let code = 0
+    let message = 'success'
+    let result = {}
+    let special_id = ctx.params.special_id
+    let page = 0
+    let num = 20
+
+    if (ctx.request.query.page) {
+      page = parseInt(ctx.request.query.page)
+    }
+    if (ctx.request.query.num) {
+      num = parseInt(ctx.request.query.num)
+    }
+
+    try {
+      result = await specialService.specialSchools(special_id,page, num)
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
+    }
+    ctx.response.body = {
+      code,
+      data: result,
+      message
+    }
+  },
   allSpecial: async (ctx, next) => {
     console.log('controller')
     let code = 0
