@@ -30,7 +30,7 @@ router.get('/schools', schoolController.schools)  //学校列表
 router.get('/specials',specialController.specials) //专业列表
       .get('/special/:special_id',specialController.special) //简介
       .get('/special/detail/:special_id', specialController.specialDetail) //详情
-      .get('/special/:special_id/schools', specialController.specialSchools) //开设大学（可加page，num）
+      .get('/special/:special_id/schools', specialController.specialSchools) //开设大学（page，num）
       .get('/allSpecial', specialController.allSpecial) //admin 爬取所有专业信息并写入数据库
 
 

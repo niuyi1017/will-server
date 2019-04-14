@@ -89,7 +89,6 @@ module.exports = {
     let rank = parseInt(ctx.request.query.rank)
     let province_id = parseInt(ctx.request.query.province_id)
     let subject_id = parseInt(ctx.request.query.subject_id)
-    console.log(rank, province_id, subject_id)
     try {
       result = await schoolService.getSchoolByRank(rank, province_id, subject_id)
       await next()
