@@ -78,14 +78,12 @@ function getSchoolSpecials(school_id,detail) {
   
 }
 function getSchoolByRank(rank, province_id, subject_id) {
-  console.log(rank, province_id, subject_id)
   if (!province_id){
     province_id = 37
   }
   if(!subject_id){
     subject_id = 1
   }
-  console.log(rank, province_id, subject_id)
   let url = `https://g.eol.cn/zsgk/api`
   let headers = {
     "Content-Type": "application/json;charset=utf-8",

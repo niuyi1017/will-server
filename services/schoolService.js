@@ -19,7 +19,6 @@ module.exports = {
     return result
   },
   getSchoolByRank: async (rank, province_id, subject_id) => {
-    console.log(rank, province_id, subject_id)
     let result = await school.getSchoolByRank(rank, province_id, subject_id)
     return result
   },
