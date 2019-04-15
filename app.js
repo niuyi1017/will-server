@@ -1,9 +1,10 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyParser')
 const serve = require('koa-static')
-// const mongoose = require('mongoose')
+const jwt = require('koa-jwt')
 const { connect, initSchema } = require('./database/init')
 const logger = require('koa-logger')
+const handle401  = require('./middlewares/handle401')
 
 const router = require('./router/router')
 
@@ -15,7 +16,10 @@ const router = require('./router/router')
 
 let port = process.env.port || 3000
 const app = new Koa()
-app.use(logger())
+
+app.use(handle401)
+   .use(jwt)
+   .use(logger())
    .use(bodyParser())
    .use(router.routes())
    .use(router.allowedMethods())

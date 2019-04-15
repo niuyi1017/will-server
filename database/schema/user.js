@@ -22,7 +22,6 @@ const userSchema = new Schema({
     default: 0
   },
   email:{
-    unique: true,
     type: String
   },
   // major: [ObjectId],
