@@ -18,7 +18,8 @@ let port = process.env.port || 3000
 const app = new Koa()
 
 app.use(handle401)
-   .use(jwt)
+  .use(jwt({ secret: 'will' }).unless({
+    path: [/\/signUp/, /\/signIn/,/\/APItest.html/]}))
    .use(logger())
    .use(bodyParser())
    .use(router.routes())

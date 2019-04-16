@@ -91,7 +91,7 @@ userSchema.pre('save', function (next) {
 })
 
 userSchema.methods = {
-  comparePassword: (_password, password) => {
+  comparePassword: (_password, password) => { //_password 表单，password 数据库
     return new Promise((resolve, reject) => {
       bcrypt.compare(_password, password,(err, isMatch) => {
         if(!err) resolve(isMatch)

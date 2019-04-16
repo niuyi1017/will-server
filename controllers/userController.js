@@ -7,6 +7,8 @@ module.exports = {
     let result = [] 
     try {
       result = await userService.signUp(user)
+      code = result.code,
+      message = result.msg
       await next()
     } catch (error) {
       code = 1
@@ -20,9 +22,10 @@ module.exports = {
   },
   signIn: async (ctx, next) => {
     let { username, password } = ctx.request.body
+    password = password + ''
     let code = 0
     let message = 'success'
-    let result = []
+    let result = {}
     try {
       result = await userService.signIn(username, password)
       await next()
