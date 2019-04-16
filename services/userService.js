@@ -1,5 +1,6 @@
 const userDao = require('../dao/user')
 const { sign } = require('jsonwebtoken')
+const secret = 'will'
 module.exports = {
   signUp: async (user) => {
     let result = {}
@@ -15,7 +16,7 @@ module.exports = {
     try {
       isMatch = await userDao.signIn(username, password)
       if(isMatch){
-        const token = sign({name: username}, 'will', { expiresIn: 60 * 60 })
+        const token = sign({ name: username }, secret, { expiresIn: 7*24*60*60*1000 })
         console.log(token)
         result.token = token
       }
