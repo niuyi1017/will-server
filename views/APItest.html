@@ -32,6 +32,12 @@
       height: 35px;
       outline: none;
     }
+    #token{
+      width: 99%;
+      height: 35px;
+      outline: none;
+      margin-bottom: 5px;
+    }
     #parameters{
       height: 200px;
       width: 99%
@@ -66,15 +72,23 @@
       </select>
       <input type="text" id="url" placeholder="请输入请求地址">
     </div>
+    <input type="text" id="token" placeholder="请先获取token">
     <textarea id="parameters" placeholder="参数列表"></textarea>
     <div class="row">
       <button id="btn">获取响应</button>
     </div>
   </div>
   <script>
-  window.onload = function () {
+    window.onload = function () {
     let btn = document.getElementById('btn')
     let result = document.getElementById('result')
+    let token = localStorage.getItem('token')
+    let tokenDom = document.getElementById('token')
+    if(token !== undefined){
+     localStorage.removeItem('token');
+    }
+
+    
     btn.onclick = function (){
       let method = document.getElementById('method').value
       let url = document.getElementById('url').value
@@ -92,12 +106,28 @@
           url,
           data: parameters,
         }).then(res => {
+          if(method == "POST"&& url =="signIn"){
+            console.log(res.data.data)
+            store(res.data.data)
+          }
           console.log('success')
         }).catch(err => {
           console.log(err)
         })
       }
     }
+}
+function store(data) {
+  console.log(data)
+  let token = data.token
+  localStorage.setItem("token", token)
+  let tokenDom = document.getElementById('token')
+  tokenDom.value = localStorage.getItem('token')
+  axios.interceptors.request.use(config => {
+    const token = localStorage.getItem('token');
+    config.headers.common['Authorization'] = 'Bearer ' + token;
+    return config;
+  })
 }
   </script>
 </body>
