@@ -5,7 +5,6 @@ const jwt = require('koa-jwt')
 const { connect, initSchema } = require('./database/init')
 const logger = require('koa-logger')
 const handle401  = require('./middlewares/handle401')
-
 const router = require('./router/router')
 
 ;(async () => {
@@ -18,7 +17,7 @@ let port = process.env.port || 3000
 const app = new Koa()
 
 app.use(handle401)
-  .use(jwt({ secret: 'will' }).unless({
+   .use(jwt({ secret: 'will' }).unless({
     path: [/\/signUp/, /\/signIn/,/\/APItest.html/]}))
    .use(logger())
    .use(bodyParser())

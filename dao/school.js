@@ -77,6 +77,7 @@ function getSchoolSpecials(school_id,detail) {
   }
   
 }
+// @Todo page
 function getSchoolByRank(rank, province_id, subject_id) {
   if (!province_id){
     province_id = 37
@@ -109,6 +110,7 @@ function getSchoolByRank(rank, province_id, subject_id) {
       });
   })
 }
+// @Todo page
 function getSchoolByScore(score, province_id, subject_id ) {
   if (!province_id) {
     province_id = 37
