@@ -59,6 +59,7 @@
     }
   </style>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/qiniu-js@2.5.4/dist/qiniu.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -76,6 +77,10 @@
     <textarea id="parameters" placeholder="参数列表"></textarea>
     <div class="row">
       <button id="btn">获取响应</button>
+    </div>
+    <div class="row">
+      <input type="file" id="imgInput" multiple="multiple">
+      <div id="ImgCon"></div>
     </div>
   </div>
   <script>
@@ -128,6 +133,44 @@ function store(data) {
     return config;
   })
 }
+const sk = "Qw7aqtmlX09_O4JkjBDKYS8UZIawZPdGo5tWGOtG:n_VnzSnPRwJ853Qrw2X8Uh0HWA8=:eyJyZXR1cm5Cb2R5Ijoie1wia2V5XCI6XCIkKGtleSlcIixcImhhc2hcIjpcIiQoZXRhZylcIixcImZzaXplXCI6JChmc2l6ZSksXCJidWNrZXRcIjpcIiQoYnVja2V0KVwiLFwibmFtZVwiOlwiJCh4Om5hbWUpXCJ9Iiwic2NvcGUiOiJ1cGxvYWR0ZXN0IiwiZGVhZGxpbmUiOjE1NTU1NzUyMTh9"
+function handleImgs(){
+  let imgInput = document.getElementById('imgInput')
+  let imgCon = document.getElementById("ImgCon")
+  imgInput.onchange = function(e){
+    let files = e.target.files
+    for(let i = 0;i<files.length;i++){
+      let file = files[i]
+      let key = files[i].name
+      let token  = sk
+      let putExtra = {}
+      let config = {
+        useCdnDomain: true,
+      }
+      var observer = {
+      next(res) {
+        console.log(res.total.percent)
+        imgCon.innerText = `已上传${res.total.loaded},总字节${res.total.total},百分比${res.total.percent}`
+      },
+      error(err) {
+        console.log(err.message)
+        imgCon.innerText += err.message
+      },
+      complete(res) {
+        console.log(res)
+        imgCon.innerText += `已完成${res.key}`
+      }
+    }
+      var observable = qiniu.upload(file, key, token, putExtra, config)
+      var subscription = observable.subscribe(observer)
+
+     
+    }
+   
+  }
+}
+ 
+handleImgs()
   </script>
 </body>
 </html>

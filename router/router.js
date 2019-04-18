@@ -2,6 +2,7 @@ const willController = require('../controllers/willController')
 const userController = require('../controllers/userController')
 const schoolController = require('../controllers/schoolController')
 const specialController = require('../controllers/specialController')
+const uploadController = require('../controllers/uploadController')
 const Router = require('koa-router')
 const router = new Router()
 
@@ -33,5 +34,7 @@ router.get('/specials',specialController.specials) //专业列表
       .get('/specials/:special_id/schools', specialController.specialSchools) //开设大学（page，num）
       .get('/allSpecias', specialController.allSpecial) //admin 爬取所有专业信息并写入数据库
 
+//upload
 
+router.get('/uploadsk',uploadController.createSk)
 module.exports  = router

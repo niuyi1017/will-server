@@ -14,7 +14,8 @@
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
-    "mongoose": "^5.4.20"
+    "mongoose": "^5.4.20",
+    "qiniu": "^7.2.1"
   },
   "devDependencies": {
     "morgan": "^1.9.1"
