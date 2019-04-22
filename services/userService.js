@@ -11,14 +11,19 @@ module.exports = {
       return new Error(error) 
     }
   },
-  signIn: async (username, password) => {
+  signIn: async (phoneNumber, password) => {
     let result = {}
     try {
-      isMatch = await userDao.signIn(username, password)
-      if(isMatch){
-        const token = sign({ name: username }, secret, { expiresIn: 7*24*60*60*1000 })
+      console.log(phoneNumber)
+      result = await userDao.signIn(phoneNumber, password)
+      console.log(result)
+      if (result.match){
+        const token = sign({ name: phoneNumber }, secret, { expiresIn: 7*24*60*60*1000 })
         console.log(token)
         result.token = token
+      }else{
+        result.code = -1
+        result.message = "账号或密码不匹配"
       }
       return result
     } catch (error) {

@@ -8,11 +8,15 @@ const MAX_LOGIN_ATTEMPTS = 5
 const LOCK_TIME = 2*60*60*1000
 
 const userSchema = new Schema({
- 
+  phoneNumber: {
+    type: String,
+    unique: true
+  },
   username: {
     type: String,
     required: true
   },
+  pinyin: String,
   password: {
     type: String,
     required: true
@@ -24,6 +28,7 @@ const userSchema = new Schema({
   email:{
     type: String
   },
+  
   // major: [ObjectId],
   // highSchool: [ObjectId],
   follower: [{

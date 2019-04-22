@@ -133,24 +133,26 @@ function store(data) {
     return config;
   })
 }
-const sk = "Qw7aqtmlX09_O4JkjBDKYS8UZIawZPdGo5tWGOtG:n_VnzSnPRwJ853Qrw2X8Uh0HWA8=:eyJyZXR1cm5Cb2R5Ijoie1wia2V5XCI6XCIkKGtleSlcIixcImhhc2hcIjpcIiQoZXRhZylcIixcImZzaXplXCI6JChmc2l6ZSksXCJidWNrZXRcIjpcIiQoYnVja2V0KVwiLFwibmFtZVwiOlwiJCh4Om5hbWUpXCJ9Iiwic2NvcGUiOiJ1cGxvYWR0ZXN0IiwiZGVhZGxpbmUiOjE1NTU1NzUyMTh9"
-function handleImgs(){
+ const sk =  `Qw7aqtmlX09_O4JkjBDKYS8UZIawZPdGo5tWGOtG:oZQkfkCPlmg7oGwWbOx1Lbkks54=:eyJyZXR1cm5Cb2R5Ijoie1wia2V5XCI6XCIkKGtleSlcIixcImhhc2hcIjpcIiQoZXRhZylcIixcImZzaXplXCI6JChmc2l6ZSksXCJidWNrZXRcIjpcIiQoYnVja2V0KVwiLFwibmFtZVwiOlwiJCh4Om5hbWUpXCJ9Iiwic2NvcGUiOiJ1cGxvYWR0ZXN0IiwiZGVhZGxpbmUiOjE1NTU4OTg5MjJ9`
+ 
+  function handleImgs(){
   let imgInput = document.getElementById('imgInput')
   let imgCon = document.getElementById("ImgCon")
   imgInput.onchange = function(e){
     let files = e.target.files
     for(let i = 0;i<files.length;i++){
       let file = files[i]
-      let key = files[i].name
+      let key = `test/${files[i].name}`
       let token  = sk
       let putExtra = {}
       let config = {
         useCdnDomain: true,
       }
+      
       var observer = {
       next(res) {
         console.log(res.total.percent)
-        imgCon.innerText = `已上传${res.total.loaded},总字节${res.total.total},百分比${res.total.percent}`
+        imgCon.innerText = `已上传${res.total.percent}% `
       },
       error(err) {
         console.log(err.message)
@@ -163,8 +165,6 @@ function handleImgs(){
     }
       var observable = qiniu.upload(file, key, token, putExtra, config)
       var subscription = observable.subscribe(observer)
-
-     
     }
    
   }
