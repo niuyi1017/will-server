@@ -21,22 +21,31 @@ module.exports = {
     }
   },
   signIn: async (ctx, next) => {
-    let { username, password } = ctx.request.body
+    let { phoneNumber, password } = ctx.request.body
+    console.log(phoneNumber)
     password = password + ''
     let code = 0
     let message = 'success'
     let result = {}
     try {
-      result = await userService.signIn(username, password)
+      result = await userService.signIn(phoneNumber, password)
       await next()
     } catch (error) {
       code = 1
       message = error.message
     }
-    ctx.response.body = {
-      code,
-      data: result,
-      message
+    if(result.token){
+      ctx.response.body = {
+        code,
+        data: result,
+        message
+      }
+    }else{
+      ctx.response.body = {
+        code: result.code,
+        data: result.data,
+        message: result.message
+      }
     }
   }
 }

@@ -1,5 +1,8 @@
 const willController = require('../controllers/willController')
 const userController = require('../controllers/userController')
+
+const questionController = require('../controllers/questionController')
+
 const schoolController = require('../controllers/schoolController')
 const specialController = require('../controllers/specialController')
 const uploadController = require('../controllers/uploadController')
@@ -17,8 +20,13 @@ router.get('/slideShows', willController.slideShows)
 router.post('/signUp', userController.signUp)
       .post('/signIn', userController.signIn)
 
+//question
+router.post('/new/question', questionController.newQuestion)
 
-//school info
+//moment
+router.post('/new/moment')
+
+//school 
 router.get('/schools', schoolController.schools)  //学校列表
       .get('/schools/:school_id', schoolController.school)// id 简介
       .get('/schools/:school_id/detail',schoolController.schoolDetail) //详情
@@ -34,7 +42,6 @@ router.get('/specials',specialController.specials) //专业列表
       .get('/specials/:special_id/schools', specialController.specialSchools) //开设大学（page，num）
       .get('/allSpecias', specialController.allSpecial) //admin 爬取所有专业信息并写入数据库
 
-//upload
-
+//uploadToQiniu
 router.get('/uploadsk',uploadController.createSk)
 module.exports  = router

@@ -7,10 +7,10 @@ module.exports = {
   createSk: async () => {
     let result = {}
     try {
-
       let  mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
       var options = {
         scope: bucket,
+        expires: 12*60*60,
         returnBody: '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}'
       }
       var putPolicy = new qiniu.rs.PutPolicy(options)
