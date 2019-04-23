@@ -29,5 +29,9 @@ module.exports = {
     } catch (error) {
       return new Error(error)
     }
+  },
+  users: async (page, num) => {
+    let result = await userDao.users(page, num)
+    return result
   }
 }

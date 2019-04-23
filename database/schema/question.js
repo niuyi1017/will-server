@@ -11,9 +11,21 @@ const questionSchema = new Schema({
     ref: 'User'
   },
   
-  read_num: Number,
-  like_num: Number,
-  favorite_num: Number,
+  read_num: {
+    type: Number,
+    default:0
+  },
+  favour_num: {
+    type: Number,
+    default: 0
+  },
+  favour: [
+    {
+      type: ObjectId,
+      ref: 'User',
+      unique: true
+    }
+  ],
 
   // comments: [{
   //   type: ObjectId,
@@ -34,10 +46,8 @@ const questionSchema = new Schema({
 
 questionSchema.pre('save', function (next) {
   if (this.isNew) {
-    console.log('isnew')
     this.meta.createdAt = this.meta.updatedAt = Date.now()
   } else {
-    console.log('!isnew')
     this.meta.updatedAt = Date.now()
   }
   next()

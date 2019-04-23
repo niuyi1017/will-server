@@ -1,8 +1,6 @@
 const willController = require('../controllers/willController')
 const userController = require('../controllers/userController')
-
 const questionController = require('../controllers/questionController')
-
 const schoolController = require('../controllers/schoolController')
 const specialController = require('../controllers/specialController')
 const uploadController = require('../controllers/uploadController')
@@ -19,12 +17,27 @@ router.get('/slideShows', willController.slideShows)
 //user page
 router.post('/signUp', userController.signUp)
       .post('/signIn', userController.signIn)
+      .get('/users', userController.users)
 
 //question
-router.post('/new/question', questionController.newQuestion)
+router.post('/question', questionController.newQuestion)//发布问题
+      /**
+        {
+            "title": "烟台大学有那些隐藏美食？2",
+            "tag": "美食",
+            "author": "5cbecd323371fc128cf0f8c6",
+            "content": "求推荐美食",
+            "picUrls":[ "http://pq2z2mcsm.bkt.clouddn.com/test/fe/1.jpg",
+                      "http://pq2z2mcsm.bkt.clouddn.com/test/fe/2.jpg"]
+            }
+       */
+      .get('/questions', questionController.questions) //问题列表
+      .get('/question/:question_id', questionController.question) //问题详情
+      .put('/question/favour', questionController.favour)//收藏问题 （uid，question_id）
+      .put('/queaton/cancelFavour', questionController.cancelFavour)//取消收藏（uid，question_id）
 
 //moment
-router.post('/new/moment')
+router.post('/moment')
 
 //school 
 router.get('/schools', schoolController.schools)  //学校列表
