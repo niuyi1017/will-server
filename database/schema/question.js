@@ -11,6 +11,14 @@ const questionSchema = new Schema({
     ref: 'User'
   },
   
+  answer: [
+    {
+      type: ObjectId,
+      ref: 'Answer',
+      unique: true
+    }
+  ],
+
   read_num: {
     type: Number,
     default:0
@@ -26,6 +34,8 @@ const questionSchema = new Schema({
       unique: true
     }
   ],
+
+  
 
   // comments: [{
   //   type: ObjectId,

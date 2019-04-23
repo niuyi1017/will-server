@@ -43,5 +43,10 @@ module.exports = {
       .skip(page * num)
       .limit(num)
     return result
+  },
+  user: async (uid) => {
+    const User = mongoose.model('User')
+    let result = await User.findOne({_id:uid})
+    return result
   }
 }

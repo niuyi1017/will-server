@@ -74,5 +74,23 @@ module.exports = {
       data: result,
       message
     }
-  }
+  },
+  user: async (ctx, next) => {
+    let code = 0
+    let message = 'success'
+    let result = {}
+    let uid = ctx.params.uid
+    try {
+      result = await userService.user(uid)
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
+    }
+    ctx.response.body = {
+      code,
+      data: result,
+      message
+    }
+  },
 }

@@ -33,5 +33,9 @@ module.exports = {
   users: async (page, num) => {
     let result = await userDao.users(page, num)
     return result
+  },
+  user: async (uid) => {
+    let result = await userDao.user(uid)
+    return result
   }
 }

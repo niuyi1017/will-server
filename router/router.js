@@ -18,6 +18,7 @@ router.get('/slideShows', willController.slideShows)
 router.post('/signUp', userController.signUp)
       .post('/signIn', userController.signIn)
       .get('/users', userController.users)
+      .get('/user/:uid',userController.user)
 
 //question
 router.post('/question', questionController.newQuestion)//发布问题
@@ -44,7 +45,7 @@ router.get('/schools', schoolController.schools)  //学校列表
       .get('/schools/:school_id', schoolController.school)// id 简介
       .get('/schools/:school_id/detail',schoolController.schoolDetail) //详情
       .get('/schools/:school_id/specials', schoolController.schoolSpecials) //开设专业
-      .get('/schoolByRank', schoolController.getSchoolByRank) //根据位次选大学
+      .get('/schoolByRank', schoolController.getSchoolByRank) //根据位次选大学  todo test
       .get('/schoolByScore', schoolController.getSchoolByScore) //根据位次选大学
       .get('/allSchools', schoolController.allSchool)  //admin 爬取所有学校信息并写入数据库
 
