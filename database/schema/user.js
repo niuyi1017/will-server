@@ -28,25 +28,113 @@ const userSchema = new Schema({
   email:{
     type: String
   },
+  avatar: String,
   
   // major: [ObjectId],
   // highSchool: [ObjectId],
   follower: [{
     type: ObjectId,
-    ref: 'User'
+    ref: 'User',
+    unique: true
   }],
   following: [{
     type: ObjectId,
-    ref: 'User'
+    ref: 'User',
+    unique: true
   }],
   contact: [{
     type: ObjectId,
-    ref: 'User'
+    ref: 'User',
+    unique: true
   }],
   school: [{
       type: ObjectId,
-      ref: 'School'
+      ref: 'School',
+      unique: true
   }],
+
+  post_num: {
+    type: Number,
+    default: 0
+  },
+  post: {
+    question: [{
+      type: ObjectId,
+      ref: 'Question',
+      unique: true
+    }],
+    article: [{
+      type: ObjectId,
+      ref: 'Article',
+      unique: true
+    }],
+    answer: [{
+      type: ObjectId,
+      ref: 'Answer',
+      unique: true
+    }],
+    moment: [{
+      type: ObjectId,
+      ref: 'Moment',
+      unique: true
+    }],
+  },
+
+  like_num: {
+    type: Number,
+    default: 0
+  },
+  like: {
+    question: [{
+      type: ObjectId,
+      ref: 'Question',
+      unique: true
+    }],
+    article: [{
+      type: ObjectId,
+      ref: 'Article',
+      unique: true
+    }],
+    answer: [{
+      type: ObjectId,
+      ref: 'Answer',
+      unique: true
+    }],
+    moment: [{
+      type: ObjectId,
+      ref: 'Moment',
+      unique: true
+    }],
+  },
+
+  favour_num: {
+    type: Number,
+    default: 0
+  },
+
+  favour: {
+    question: [{
+      type: ObjectId,
+      ref: 'Question',
+      unique: true
+    }],
+    article: [{
+      type: ObjectId,
+      ref: 'Article',
+      unique: true
+    }],
+    answer: [{
+      type: ObjectId,
+      ref: 'Answer',
+      unique: true
+    }],
+    moment: [{
+      type: ObjectId,
+      ref: 'Moment',
+      unique: true
+    }],
+  },
+
   // post: [ObjectId],
   // comment: [ObjectId],
 

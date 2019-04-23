@@ -36,5 +36,12 @@ module.exports = {
       return new Error(error)
     }
     return result
+  },
+  users: async (page, num) => {
+    const User = mongoose.model('User')
+    let result = await User.find({})
+      .skip(page * num)
+      .limit(num)
+    return result
   }
 }
