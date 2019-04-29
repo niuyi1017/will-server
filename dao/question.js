@@ -5,7 +5,6 @@ module.exports = {
     const Question = mongoose.model('Question')
     const User = mongoose.model('User')
     let uid = _question.author
-    console.log(uid)
     let result = {}
     try {
       let question = new Question(_question)
