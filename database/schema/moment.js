@@ -2,23 +2,43 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 const momentSchema = new Schema({
-  title: String,
   author: {
     type: ObjectId,
     ref: 'User'
   },
-  content: {
-    picList: [],
-    title: String,
-    text: String
-  },
+  content: String,
+  picUrls: [],
+  
   // comments: [{
   //   type: ObjectId,
   //   ref: 'Comment'
   // }],
-  read_num: Number,
-  like_num: Number,
-  favorite_num: Number,
+  read_num: {
+    type: Number,
+    default: 0
+  },
+  favour_num: {
+    type: Number,
+    default: 0
+  },
+  like_num: {
+    type: Number,
+    default: 0
+  },
+  favour: [
+    {
+      type: ObjectId,
+      ref: 'User',
+      unique: true
+    }
+  ],
+  like: [
+    {
+      type: ObjectId,
+      ref: 'User',
+      unique: true
+    }
+  ],
   meta: {
     createdAt: {
       type: Date,
@@ -33,10 +53,8 @@ const momentSchema = new Schema({
 
 momentSchema.pre('save', function (next) {
   if (this.isNew) {
-    console.log('isnew')
     this.meta.createdAt = this.meta.updatedAt = Date.now()
   } else {
-    console.log('!isnew')
     this.meta.updatedAt = Date.now()
   }
   next()

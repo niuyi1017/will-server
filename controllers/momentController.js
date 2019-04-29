@@ -1,13 +1,12 @@
-const schoolService = require('../services/schoolService')
-const jwt = require('koa-jwt')
+const momentService = require('../services/momentService')
 module.exports = {
-  school: async (ctx, next) => {
+  newMoment: async (ctx, next) => {
     let code = 0
     let message = 'success'
     let result = {}
-    let school_id = ctx.params.school_id
+    let moment = ctx.request.body
     try {
-      result = await schoolService.school(school_id)
+      result = await momentService.newMoment(moment)
       await next()
     } catch (error) {
       code = 1
@@ -19,40 +18,22 @@ module.exports = {
       message
     }
   },
-  schoolDetail: async (ctx, next) => {
-    let code = 0
-    let message = 'success'
-    let result = {}
-    let school_id = ctx.params.school_id
-    try {
-      result = await schoolService.schoolDetail(school_id)
-      await next()
-    } catch (error) {
-      code = 1
-      message = error.message
-    }
-    ctx.response.body = {
-      code,
-      data: result,
-      message
-    }
-  },
-  schools: async (ctx, next) => {
+  moments: async (ctx, next) => {
     let code = 0
     let message = 'success'
     let result = {}
     let page = 0
     let num = 20
-    
-    if (ctx.request.query.page){
+
+    if (ctx.request.query.page) {
       page = parseInt(ctx.request.query.page)
     }
     if (ctx.request.query.num) {
       num = parseInt(ctx.request.query.num)
     }
-    
+
     try {
-      result = await schoolService.schools(page, num)
+      result = await momentService.moments(page, num)
       await next()
     } catch (error) {
       code = 1
@@ -64,14 +45,13 @@ module.exports = {
       message
     }
   },
-  schoolSpecials: async (ctx, next) => {
-    console.log('controller')
+  moment: async (ctx, next) => {
     let code = 0
     let message = 'success'
     let result = {}
-    let school_id = ctx.params.school_id
+    let moment_id = ctx.params.moment_id
     try {
-      result = await schoolService.schoolSpecials(school_id)
+      result = await momentService.moment(moment_id)
       await next()
     } catch (error) {
       code = 1
@@ -83,15 +63,14 @@ module.exports = {
       message
     }
   },
-  getSchoolByRank: async (ctx, next) => {
+  favour: async (ctx, next) => {
     let code = 0
     let message = 'success'
     let result = {}
-    let rank = parseInt(ctx.request.query.rank)
-    let province_id = parseInt(ctx.request.query.province_id)
-    let subject_id = parseInt(ctx.request.query.subject_id)
+    let { moment_id, uid } = ctx.request.body
+    console.log(moment_id, uid)
     try {
-      result = await schoolService.getSchoolByRank(rank, province_id, subject_id)
+      result = await momentService.favour(moment_id, uid)
       await next()
     } catch (error) {
       code = 1
@@ -103,15 +82,14 @@ module.exports = {
       message
     }
   },
-  getSchoolByScore: async (ctx, next) => {
+  cancelFavour: async (ctx, next) => {
     let code = 0
     let message = 'success'
     let result = {}
-    let score = parseInt(ctx.request.query.score)
-    let province_id = parseInt(ctx.request.query.province_id)
-    let subject_id = parseInt(ctx.request.query.subject_id)
+    let { moment_id, uid } = ctx.request.body
+    console.log(moment_id, uid)
     try {
-      result = await schoolService.getSchoolByScore(score, province_id, subject_id )
+      result = await momentService.cancelFavour(moment_id, uid)
       await next()
     } catch (error) {
       code = 1
@@ -123,13 +101,33 @@ module.exports = {
       message
     }
   },
-  allSchool: async (ctx, next) => {
-    console.log('controller')
+  like: async (ctx, next) => {
     let code = 0
     let message = 'success'
     let result = {}
+    let { moment_id, uid } = ctx.request.body
+    console.log(moment_id, uid)
     try {
-      result = await schoolService.allSchool()
+      result = await momentService.like(moment_id, uid)
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
+    }
+    ctx.response.body = {
+      code,
+      data: result,
+      message
+    }
+  },
+  cancelLike: async (ctx, next) => {
+    let code = 0
+    let message = 'success'
+    let result = {}
+    let { moment_id, uid } = ctx.request.body
+    console.log(moment_id, uid)
+    try {
+      result = await momentService.cancelLike(moment_id, uid)
       await next()
     } catch (error) {
       code = 1

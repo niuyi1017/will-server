@@ -22,7 +22,6 @@ module.exports = {
   },
   signIn: async (ctx, next) => {
     let { phoneNumber, password } = ctx.request.body
-    console.log(phoneNumber)
     password = password + ''
     let code = 0
     let message = 'success'

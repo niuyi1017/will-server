@@ -14,7 +14,6 @@ module.exports = {
   signIn: async (phoneNumber, password) => {
     let result = {}
     try {
-      console.log(phoneNumber)
       result = await userDao.signIn(phoneNumber, password)
       console.log(result)
       if (result.match){

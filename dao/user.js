@@ -27,7 +27,6 @@ module.exports = {
     result.match = false
     try {
       let _user = await User.findOne({ phoneNumber: phoneNumber})
-      console.log(_user)
       if (_user) {
         result.uid = _user._id
         result.match = await _user.comparePassword(password, _user.password)
