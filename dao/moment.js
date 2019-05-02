@@ -29,11 +29,19 @@ module.exports = {
     let result = await Moment.find({})
       .skip(page * num)
       .limit(num)
+      .sort({'meta.createdAt':-1})
+      .populate({path: 'author',select: ['avatar','username','following']})
+      .exec()
+
+    //判断是否需要fellow按钮改为由客户端判断，登录后更新localStorage储存该用户的Follling
     return result
   },
   moment: async (moment_id) => {
     const Moment = mongoose.model('Moment')
     let result = await Moment.findByIdAndUpdate(moment_id, { $inc: { read_num: 1 } })
+      .populate({ path: 'author', select: 'username' })
+      .exec()
+
     return result
   },
   favour: async (moment_id, uid) => {

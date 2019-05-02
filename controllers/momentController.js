@@ -24,7 +24,7 @@ module.exports = {
     let result = {}
     let page = 0
     let num = 20
-
+    let uid = ctx.uid
     if (ctx.request.query.page) {
       page = parseInt(ctx.request.query.page)
     }
@@ -33,7 +33,7 @@ module.exports = {
     }
 
     try {
-      result = await momentService.moments(page, num)
+      result = await momentService.moments(uid,page, num)
       await next()
     } catch (error) {
       code = 1

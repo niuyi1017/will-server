@@ -5,8 +5,8 @@ module.exports = {
     let result = await moment.newMoment(_moment)
     return result
   },
-  moments: async (page, num) => {
-    let result = await moment.moments(page, num)
+  moments: async (uid,page, num) => {
+    let result = await moment.moments(uid,page, num)
     return result
   },
   moment: async (moment_id) => {

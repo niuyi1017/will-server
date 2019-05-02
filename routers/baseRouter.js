@@ -5,6 +5,7 @@ const momentController = require('../controllers/momentController')
 const schoolController = require('../controllers/schoolController')
 const specialController = require('../controllers/specialController')
 const uploadController = require('../controllers/uploadController')
+const parseToken = require('../middlewares/parseToken')
 const Router = require('koa-router')
 const router = new Router()
 const jwt = require('koa-jwt')({ secret: 'will' })
@@ -19,7 +20,7 @@ router.get('/slideShows', willController.slideShows)
 //user page
 router.post('/signUp', userController.signUp)
       .post('/signIn', userController.signIn)
-      .get('/users',jwt, userController.users)
+      .get('/users', userController.users)
       .get('/user/:uid',jwt,userController.user)
 
 //question
@@ -41,11 +42,11 @@ router.post('/question',jwt, questionController.newQuestion)//发布问题
 
 //moment
 router.post('/moment',jwt,momentController.newMoment)//发布同学圈
-      .get('/moments', momentController.moments) //问题列表
-      .get('/moments/:moment_id', jwt, momentController.moment) //问题详情
-      .put('/moment/favour', jwt, momentController.favour)//收藏问题 （uid，moment_id）
+      .get('/moments', momentController.moments) //同学圈列表
+      .get('/moments/:moment_id', momentController.moment) //同学圈详情
+      .put('/moment/favour', jwt, momentController.favour)//收藏同学圈 （uid，moment_id）
       .put('/moment/cancelFavour', jwt, momentController.cancelFavour)//取消收藏（uid，moment_id）
-      .put('/moment/like', jwt, momentController.like)//点赞问题 （uid，moment_id）
+      .put('/moment/like', jwt, momentController.like)//点赞同学圈 （uid，moment_id）
       .put('/moment/cancelLike', jwt, momentController.cancelLike)//取消点赞（uid，moment_id）
 
 //school 

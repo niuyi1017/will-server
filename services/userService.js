@@ -15,10 +15,9 @@ module.exports = {
     let result = {}
     try {
       result = await userDao.signIn(phoneNumber, password)
-      console.log(result)
       if (result.match){
-        const token = sign({ name: phoneNumber }, secret, { expiresIn: 7*24*60*60*1000 })
-        console.log(token)
+        const uid = result.uid
+        const token = sign({ uid }, secret, { expiresIn: 7*24*60*60*1000 })
         result.token = token
       }else{
         result.code = -1
