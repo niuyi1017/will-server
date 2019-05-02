@@ -28,7 +28,10 @@ const userSchema = new Schema({
   email:{
     type: String
   },
-  avatar: String,
+  avatar: {
+    type: String,
+    default: "http://blogpic.niuy.xyz/avataaars.png"
+  },
   
   // major: [ObjectId],
   // highSchool: [ObjectId],
