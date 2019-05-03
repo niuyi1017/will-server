@@ -30,11 +30,14 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
-    default: "http://blogpic.niuy.xyz/avataaars.png"
+    default: "http://blogpic.niuy.xyz/Screenshot_20170417-232840_1.jpg"
   },
   
-  // major: [ObjectId],
-  // highSchool: [ObjectId],
+  major: [ObjectId],
+  highSchool: String,
+
+  intro: String,
+  tags: [String],
   follower: [{
     type: ObjectId,
     ref: 'User',
@@ -81,6 +84,11 @@ const userSchema = new Schema({
       ref: 'Moment',
       unique: true
     }],
+    comment: [{
+      type: ObjectId,
+      ref: 'Comment',
+      unique: true
+    }],
   },
 
   like_num: {
@@ -108,6 +116,11 @@ const userSchema = new Schema({
       ref: 'Moment',
       unique: true
     }],
+    comment: [{
+      type: ObjectId,
+      ref: 'Comment',
+      unique: true
+    }]
   },
 
   favour_num: {
@@ -138,16 +151,12 @@ const userSchema = new Schema({
     }],
   },
 
-  // post: [ObjectId],
-  // comment: [ObjectId],
-
   lockUntil: Number,
   loginAttempts: {
     type: Number,
     required: true,
     default: 0
   },
-
 
   meta: {
     createdAt: {

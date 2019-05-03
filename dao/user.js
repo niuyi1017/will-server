@@ -24,12 +24,15 @@ module.exports = {
   signIn: async (phoneNumber, password) => {
     const User = mongoose.model('User')
     let result = {}
-    result.match = false
     try {
       let _user = await User.findOne({ phoneNumber: phoneNumber})
       if (_user) {
-        result.uid = _user._id
-        result.match = await _user.comparePassword(password, _user.password)
+        let match = await _user.comparePassword(password, _user.password)
+        result.match = match
+        if(match){
+          result.uid = _user._id
+          result.following = _user.following
+        }
       }
     } catch (error) {
       return new Error(error)
