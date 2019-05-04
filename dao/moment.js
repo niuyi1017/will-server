@@ -11,7 +11,7 @@ module.exports = {
       let savedMoment = await moment.save()
       let moment_id = savedMoment._id
       let update = {
-        $push: { "post.moment": moment_id },
+        $push: { "post.moment": {content: moment_id }},
         $inc: { post_num: 1 }
       }
       let user = await User.findByIdAndUpdate(uid, update)
@@ -30,7 +30,7 @@ module.exports = {
       .skip(page * num)
       .limit(num)
       .sort({'meta.createdAt':-1})
-      .populate({path: 'author',select: ['avatar','username','following']})
+      .populate({path: 'author',select: ['avatar','username']})
       .exec()
 
     //判断是否需要fellow按钮改为由客户端判断，登录后更新localStorage储存该用户的Follling

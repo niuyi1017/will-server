@@ -33,25 +33,43 @@ const userSchema = new Schema({
     default: "http://blogpic.niuy.xyz/Screenshot_20170417-232840_1.jpg"
   },
   
-  major: [ObjectId],
+  major: String,
   highSchool: String,
 
   intro: String,
   tags: [String],
   follower: [{
-    type: ObjectId,
-    ref: 'User',
-    unique: true
+    content: {
+      type: ObjectId,
+      ref: 'User',
+      unique: true
+    },
+    time: {
+      type: Date,
+      default: Date.now()
+    }
   }],
   following: [{
-    type: ObjectId,
-    ref: 'User',
-    unique: true
+    content: {
+      type: ObjectId,
+      ref: 'User',
+      unique: true
+    },
+    time: {
+      type: Date,
+      default: Date.now()
+    }
   }],
   contact: [{
-    type: ObjectId,
-    ref: 'User',
-    unique: true
+    content: {
+      type: ObjectId,
+      ref: 'User',
+      unique: true
+    },
+    time: {
+      type: Date,
+      default: Date.now()
+    }
   }],
   school: [{
       type: ObjectId,
@@ -65,29 +83,59 @@ const userSchema = new Schema({
   },
   post: {
     question: [{
-      type: ObjectId,
-      ref: 'Question',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Question',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
     article: [{
-      type: ObjectId,
-      ref: 'Article',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Article',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
     answer: [{
-      type: ObjectId,
-      ref: 'Answer',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Answer',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
     moment: [{
-      type: ObjectId,
-      ref: 'Moment',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Moment',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
     comment: [{
-      type: ObjectId,
-      ref: 'Comment',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Comment',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
   },
 
@@ -97,30 +145,60 @@ const userSchema = new Schema({
   },
   like: {
     question: [{
-      type: ObjectId,
-      ref: 'Question',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Question',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
     article: [{
-      type: ObjectId,
-      ref: 'Article',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Article',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
     answer: [{
-      type: ObjectId,
-      ref: 'Answer',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Answer',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
     moment: [{
-      type: ObjectId,
-      ref: 'Moment',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Moment',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
     comment: [{
-      type: ObjectId,
-      ref: 'Comment',
-      unique: true
-    }]
+      content: {
+        type: ObjectId,
+        ref: 'Comment',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
+    }],
   },
 
   favour_num: {
@@ -130,27 +208,63 @@ const userSchema = new Schema({
 
   favour: {
     question: [{
-      type: ObjectId,
-      ref: 'Question',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Question',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
     article: [{
-      type: ObjectId,
-      ref: 'Article',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Article',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
     answer: [{
-      type: ObjectId,
-      ref: 'Answer',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Answer',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
     moment: [{
-      type: ObjectId,
-      ref: 'Moment',
-      unique: true
+      content: {
+        type: ObjectId,
+        ref: 'Moment',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
+    }],
+    comment: [{
+      content: {
+        type: ObjectId,
+        ref: 'Comment',
+        unique: true
+      },
+      time: {
+        type: Date,
+        default: Date.now()
+      }
     }],
   },
 
+  
   lockUntil: Number,
   loginAttempts: {
     type: Number,
