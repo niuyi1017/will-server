@@ -50,5 +50,15 @@ module.exports = {
     const User = mongoose.model('User')
     let result = await User.findOne({_id:uid})
     return result
+  },    
+  userRecentlyMoments: async (uid) => {
+    const User = mongoose.model('User')
+    let result = await User.findOne({ _id: uid })
+      .populate({
+        path:'post.moment.content',
+        select: ['content','picUrls']
+      })
+    .exec()
+    return result
   }
 }

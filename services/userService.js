@@ -35,5 +35,9 @@ module.exports = {
   user: async (uid) => {
     let result = await userDao.user(uid)
     return result
+  },
+  userRecentlyMoments: async (uid) => {
+    let result = await userDao.userRecentlyMoments(uid)
+    return result
   }
 }
