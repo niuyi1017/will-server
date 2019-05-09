@@ -31,3 +31,4 @@ module.exports = {
     return result
   }
 }
+  // "test": "echo \"Error: no test specified\" && exit 1",
