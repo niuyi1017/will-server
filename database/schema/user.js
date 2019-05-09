@@ -5,7 +5,7 @@ const ObjectId = Schema.Types.ObjectId
 
 const SALT_WORK_FACTOR = 10
 const MAX_LOGIN_ATTEMPTS = 5
-const LOCK_TIME = 2*60*60*1000
+const LOCK_TIME = 2 * 60 * 60 * 1000
 
 const userSchema = new Schema({
   phoneNumber: {
@@ -21,60 +21,42 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  role:{
+  role: {
     type: Number,
     default: 0
   },
-  email:{
+  email: {
     type: String
   },
   avatar: {
     type: String,
     default: "http://blogpic.niuy.xyz/Screenshot_20170417-232840_1.jpg"
   },
-  
+
   major: String,
   highSchool: String,
 
   intro: String,
   tags: [String],
   follower: [{
-    content: {
-      type: ObjectId,
-      ref: 'User',
-      unique: true
-    },
-    time: {
-      type: Date,
-      default: Date.now()
-    }
+    type: ObjectId,
+    ref: 'User',
+    unique: true
   }],
   following: [{
-    content: {
-      type: ObjectId,
-      ref: 'User',
-      unique: true
-    },
-    time: {
-      type: Date,
-      default: Date.now()
-    }
+    type: ObjectId,
+    ref: 'User',
+    unique: true
   }],
   contact: [{
-    content: {
-      type: ObjectId,
-      ref: 'User',
-      unique: true
-    },
-    time: {
-      type: Date,
-      default: Date.now()
-    }
+    type: ObjectId,
+    ref: 'User',
+    unique: true
   }],
   school: [{
-      type: ObjectId,
-      ref: 'School',
-      unique: true
+    type: ObjectId,
+    ref: 'School',
+    unique: true
   }],
 
   post_num: {
@@ -83,59 +65,29 @@ const userSchema = new Schema({
   },
   post: {
     question: [{
-      content: {
-        type: ObjectId,
-        ref: 'Question',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Question',
+      unique: true
     }],
     article: [{
-      content: {
-        type: ObjectId,
-        ref: 'Article',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Article',
+      unique: true
     }],
     answer: [{
-      content: {
-        type: ObjectId,
-        ref: 'Answer',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Answer',
+      unique: true
     }],
     moment: [{
-      content: {
-        type: ObjectId,
-        ref: 'Moment',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Moment',
+      unique: true
     }],
     comment: [{
-      content: {
-        type: ObjectId,
-        ref: 'Comment',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Comment',
+      unique: true
     }],
   },
 
@@ -145,59 +97,29 @@ const userSchema = new Schema({
   },
   like: {
     question: [{
-      content: {
-        type: ObjectId,
-        ref: 'Question',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Question',
+      unique: true
     }],
     article: [{
-      content: {
-        type: ObjectId,
-        ref: 'Article',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Article',
+      unique: true
     }],
     answer: [{
-      content: {
-        type: ObjectId,
-        ref: 'Answer',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Answer',
+      unique: true
     }],
     moment: [{
-      content: {
-        type: ObjectId,
-        ref: 'Moment',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Moment',
+      unique: true
     }],
     comment: [{
-      content: {
-        type: ObjectId,
-        ref: 'Comment',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Comment',
+      unique: true
     }],
   },
 
@@ -208,63 +130,32 @@ const userSchema = new Schema({
 
   favour: {
     question: [{
-      content: {
-        type: ObjectId,
-        ref: 'Question',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Question',
+      unique: true
     }],
     article: [{
-      content: {
-        type: ObjectId,
-        ref: 'Article',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Article',
+      unique: true
     }],
     answer: [{
-      content: {
-        type: ObjectId,
-        ref: 'Answer',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Answer',
+      unique: true
     }],
     moment: [{
-      content: {
-        type: ObjectId,
-        ref: 'Moment',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Moment',
+      unique: true
     }],
     comment: [{
-      content: {
-        type: ObjectId,
-        ref: 'Comment',
-        unique: true
-      },
-      time: {
-        type: Date,
-        default: Date.now()
-      }
+      type: ObjectId,
+      ref: 'Comment',
+      unique: true
     }],
   },
 
-  
   lockUntil: Number,
   loginAttempts: {
     type: Number,
@@ -289,19 +180,19 @@ userSchema.virtual('isLocked').get(() => {
 })
 
 userSchema.pre('save', function (next) {
-  if(this.isNew){
+  if (this.isNew) {
     this.meta.createdAt = this.meta.updatedAt = Date.now()
-  }else{
+  } else {
     this.updatedAt = Date.now()
   }
   next()
 })
 userSchema.pre('save', function (next) {
   if (!this.isModified('password')) return next()
-  
-  bcrypt.genSalt(SALT_WORK_FACTOR, (err,salt) => {
-    if(err) return next(err)
-    bcrypt.hash(this.password,salt,(error,hash) => {
+
+  bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
+    if (err) return next(err)
+    bcrypt.hash(this.password, salt, (error, hash) => {
       if (err) return next(err)
       this.password = hash
       next()
@@ -312,15 +203,15 @@ userSchema.pre('save', function (next) {
 userSchema.methods = {
   comparePassword: (_password, password) => { //_password 表单，password 数据库
     return new Promise((resolve, reject) => {
-      bcrypt.compare(_password, password,(err, isMatch) => {
-        if(!err) resolve(isMatch)
+      bcrypt.compare(_password, password, (err, isMatch) => {
+        if (!err) resolve(isMatch)
         else reject(err)
       })
     })
   },
   incLoginAttempts: (user) => {
     return new Promise((resolve, reject) => {
-      if (this.lockUntil && this.lockUntil < Date.now()){
+      if (this.lockUntil && this.lockUntil < Date.now()) {
         this.update({
           $set: {
             loginAttempts: 1
@@ -328,23 +219,23 @@ userSchema.methods = {
           $unset: {
             lockUntil: 1
           }
-        },(err) => {
-          if(!err) resolve(true)
+        }, (err) => {
+          if (!err) resolve(true)
           else reject(err)
         })
-      }else{
+      } else {
         let updates = {
           $inc: {
             loginAttempts: 1
           }
         }
-        if(this.loginAttempts + 1 >= MAX_LOGIN_ATTEMPTS && !this.isLocked) {
+        if (this.loginAttempts + 1 >= MAX_LOGIN_ATTEMPTS && !this.isLocked) {
           updates.$set = {
             lockUntil: Date.now() + LOCK_TIME
           }
         }
         this.update(updates, err => {
-          if(!err) resolve(true)
+          if (!err) resolve(true)
           else reject(err)
         })
       }

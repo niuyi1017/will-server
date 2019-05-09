@@ -110,4 +110,24 @@ module.exports = {
       message
     }
   },
+  userFollow: async (ctx, next) => {
+    let { from, to } = ctx.request.body
+    let code = 0
+    let message = 'success'
+    let result = {}
+    try {
+      result = await userService.userFollow(from, to)
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
+    }
+    
+    ctx.response.body = {
+      code,
+      data: result,
+      message
+    }
+    
+  },
 }

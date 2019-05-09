@@ -11,7 +11,7 @@ module.exports = {
       let savedMoment = await moment.save()
       let moment_id = savedMoment._id
       let update = {
-        $push: { "post.moment": {content: moment_id }},
+        $push: { "post.moment":  moment_id },
         $inc: { post_num: 1 }
       }
       let user = await User.findByIdAndUpdate(uid, update)
