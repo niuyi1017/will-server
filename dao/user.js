@@ -55,10 +55,31 @@ module.exports = {
     const User = mongoose.model('User')
     let result = await User.findOne({ _id: uid })
       .populate({
-        path:'post.moment.content',
-        select: ['content','picUrls']
+        path:'post.moment',
+        select: ['content','picUrls','meta']
       })
     .exec()
+    return result
+  },
+  userFollow: async (from, to) => {
+    const User = mongoose.model('User')
+    let result = {}
+    try {
+      let updateFollowing = {
+        $push: { "post.following": to }
+      }
+      let updateFollower = {
+        $push: { "post.follower": from }
+      }
+      let newFrom = await User.findByIdAndUpdate(from, updateFollowing)
+      let newTo = await User.findByIdAndUpdate(to, updateFollower)
+      result = {
+        following: newTo._id, //当前用户新关注的人
+        follower: newFrom._id //当前用户
+      }
+    } catch (error) {
+      return new Error(error)
+    }
     return result
   }
 }

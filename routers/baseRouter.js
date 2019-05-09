@@ -23,6 +23,7 @@ router.post('/signUp', userController.signUp)
       .get('/users', userController.users)
       .get('/user/:uid',jwt,userController.user)
       .get('/userRecentlyMoments', userController.userRecentlyMoments)
+      .post('/user/follow', userController.userFollow)
 
 //question
 router.post('/question',jwt, questionController.newQuestion)//发布问题
