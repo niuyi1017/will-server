@@ -1,8 +1,8 @@
 const moment = require('../dao/moment')
 
 module.exports = {
-  newMoment: async (_moment) => {
-    let result = await moment.newMoment(_moment)
+  newMoment: async (_moment, recentlyMoment) => {
+    let result = await moment.newMoment(_moment, recentlyMoment)
     return result
   },
   moments: async (uid,page, num) => {
