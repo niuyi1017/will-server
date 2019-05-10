@@ -4,9 +4,10 @@ module.exports = {
     let code = 0
     let message = 'success'
     let result = {}
-    let moment = ctx.request.body
+    let moment = ctx.request.body.postContent
+    let recentlyMoment = ctx.request.body.recentlyMoment
     try {
-      result = await momentService.newMoment(moment)
+      result = await momentService.newMoment(moment, recentlyMoment)
       await next()
     } catch (error) {
       code = 1

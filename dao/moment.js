@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 module.exports = {
-  newMoment: async (_moment) => {
+  newMoment: async (_moment, recentlyMoment) => {
     const Moment = mongoose.model('Moment')
     const User = mongoose.model('User')
     let uid = _moment.author
@@ -11,7 +11,10 @@ module.exports = {
       let savedMoment = await moment.save()
       let moment_id = savedMoment._id
       let update = {
-        $push: { "post.moment":  moment_id },
+        $push: { 
+          "post.moment":  moment_id,
+          "recentlyMoments": recentlyMoment 
+        },
         $inc: { post_num: 1 }
       }
       let user = await User.findByIdAndUpdate(uid, update)

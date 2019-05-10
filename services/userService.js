@@ -40,8 +40,8 @@ module.exports = {
     let result = await userDao.userRecentlyMoments(uid)
     return result
   },
-  userFollow: async (from, to) => {
-    let result = await userDao.userFollow(from, to)
+  userFollow: async (from, to, recentlyMoment) => {
+    let result = await userDao.userFollow(from, to, recentlyMoment)
     console.log(result)
     return result
   },
