@@ -32,6 +32,7 @@ module.exports = {
         if(match){
           result.uid = _user._id
           result.following = _user.following
+          result.recentlyMoments = _user.recentlyMoments
         }
       }
     } catch (error) {
@@ -61,15 +62,18 @@ module.exports = {
     .exec()
     return result
   },
-  userFollow: async (from, to) => {
+  userFollow: async (from, to, recentlyMoment) => {
     const User = mongoose.model('User')
     let result = {}
     try {
       let updateFollowing = {
-        $push: { "post.following": to }
+        $push: { 
+          "following": to ,
+          "recentlyMoments": recentlyMoment 
+        }
       }
       let updateFollower = {
-        $push: { "post.follower": from }
+        $push: { "follower": from }
       }
       let newFrom = await User.findByIdAndUpdate(from, updateFollowing)
       let newTo = await User.findByIdAndUpdate(to, updateFollower)

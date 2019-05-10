@@ -155,7 +155,7 @@ const userSchema = new Schema({
       unique: true
     }],
   },
-
+  recentlyMoments:[],
   lockUntil: Number,
   loginAttempts: {
     type: Number,
