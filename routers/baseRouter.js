@@ -57,7 +57,7 @@ router.get('/schools',schoolController.schools)  //学校列表
       .get('/schools/:school_id/detail',jwt,schoolController.schoolDetail) //详情
       .get('/schools/:school_id/specials', schoolController.schoolSpecials) //开设专业
       .get('/schoolByRank',jwt, schoolController.getSchoolByRank) //根据位次选大学  todo test
-      .get('/schoolByScore', jwt,schoolController.getSchoolByScore) //根据位次选大学
+      .get('/schoolByScore',jwt,schoolController.getSchoolByScore) //根据位次选大学
       .get('/allSchools',jwt, schoolController.allSchool)  //admin 爬取所有学校信息并写入数据库
 
 //special 

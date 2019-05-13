@@ -33,6 +33,8 @@ module.exports = {
           result.uid = _user._id
           result.following = _user.following
           result.recentlyMoments = _user.recentlyMoments
+          result.like = _user.like,
+          result.favour = _user.favour
         }
       }
     } catch (error) {

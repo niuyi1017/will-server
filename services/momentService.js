@@ -21,8 +21,8 @@ module.exports = {
     let result = await moment.cancelFavour(moment_id, uid)
     return result
   },
-  like: async (moment_id, uid) => {
-    let result = await moment.like(moment_id, uid)
+  like: async (moment_id, from, to, recentlyMoment) => {
+    let result = await moment.like(moment_id, from, to, recentlyMoment)
     return result
   },
   cancelLike: async (moment_id, uid) => {
