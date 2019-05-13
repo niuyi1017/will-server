@@ -130,7 +130,7 @@ function getSchoolByScore(score, province_id, subject_id ) {
     "local_type_id": subject_id,
     "page": 1,
     "request_type": 2,
-    "size": 20,
+    "size": 50,
     score,
     "uri": "gksjk/api/school/gufenlists"
   }
