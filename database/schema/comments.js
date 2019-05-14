@@ -1,44 +1,32 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
-const momentSchema = new Schema({
+const commentSchema = new Schema({
   author: {
     type: ObjectId,
     ref: 'User'
   },
   content: String,
-  picUrls: [],
-  
-  comments: [{
-    type: ObjectId,
-    ref: 'Comment'
+
+  replys: [{
+    from:{
+      type: ObjectId,
+      ref: 'User'
+    },
+    to: {
+      type: ObjectId,
+      ref: 'User'
+    },
+    content: String
   }],
-  read_num: {
-    type: Number,
-    default: 0
-  },
-  favour_num: {
-    type: Number,
-    default: 0
-  },
+  
+ 
   like_num: {
     type: Number,
     default: 0
   },
-  favour: [
-    {
-      type: ObjectId,
-      ref: 'User',
-      unique: true
-    }
-  ],
-  like: [
-    {
-      type: ObjectId,
-      ref: 'User',
-      unique: true
-    }
-  ],
+  
+  
   meta: {
     createdAt: {
       type: Date,
@@ -51,7 +39,7 @@ const momentSchema = new Schema({
   }
 })
 
-momentSchema.pre('save', function (next) {
+commentSchema.pre('save', function (next) {
   if (this.isNew) {
     this.meta.createdAt = this.meta.updatedAt = Date.now()
   } else {
@@ -60,4 +48,4 @@ momentSchema.pre('save', function (next) {
   next()
 })
 
-mongoose.model('Moment', momentSchema)
+mongoose.model('Comment', commentSchema)
