@@ -106,10 +106,9 @@ module.exports = {
     let code = 0
     let message = 'success'
     let result = {}
-    let { moment_id, from, to, recentlyMoment } = ctx.request.body
-    console.log(moment_id, from, to, recentlyMoment)
+    let { moment_id, from, to, recentlyMoment, notification } = ctx.request.body
     try {
-      result = await momentService.like(moment_id, from, to, recentlyMoment)
+      result = await momentService.like(moment_id, from, to, recentlyMoment, notification)
       await next()
     } catch (error) {
       code = 1

@@ -64,7 +64,7 @@ module.exports = {
     .exec()
     return result
   },
-  userFollow: async (from, to, recentlyMoment) => {
+  userFollow: async (from, to, recentlyMoment, notification) => {
     const User = mongoose.model('User')
     let result = {}
     try {
@@ -75,7 +75,10 @@ module.exports = {
         }
       }
       let updateFollower = {
-        $push: { "follower": from }
+        $push: { 
+          "follower": from,
+          'notifications': notification
+        }
       }
       let newFrom = await User.findByIdAndUpdate(from, updateFollowing)
       let newTo = await User.findByIdAndUpdate(to, updateFollower)

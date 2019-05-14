@@ -4,6 +4,7 @@ const questionController = require('../controllers/questionController')
 const momentController = require('../controllers/momentController')
 const schoolController = require('../controllers/schoolController')
 const specialController = require('../controllers/specialController')
+const messageController = require('../controllers/messageController')
 const uploadController = require('../controllers/uploadController')
 const parseToken = require('../middlewares/parseToken')
 const Router = require('koa-router')
@@ -51,6 +52,7 @@ router.post('/moment',jwt,momentController.newMoment)//发布同学圈
       .put('/moment/like', jwt, momentController.like)//点赞同学圈 （uid，moment_id）
       .put('/moment/cancelLike', jwt, momentController.cancelLike)//取消点赞（uid，moment_id）
 
+router.get('/messages/notifications',messageController.notifications)
 //school 
 router.get('/schools',schoolController.schools)  //学校列表
       .get('/schools/:school_id', schoolController.school)// id 简介
