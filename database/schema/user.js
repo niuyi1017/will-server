@@ -156,6 +156,20 @@ const userSchema = new Schema({
     }],
   },
   recentlyMoments:[],
+  notifications:[{
+    from:{
+      type: ObjectId,
+      ref: 'User',
+      unique: true
+    },
+    message:String,
+    postTime: String,
+    articlePic: String,
+    isFollow:{
+      type: Boolean,
+      default: false
+    }
+  }],
   lockUntil: Number,
   loginAttempts: {
     type: Number,

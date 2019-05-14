@@ -44,7 +44,6 @@ module.exports = {
     let result = await Moment.findByIdAndUpdate(moment_id, { $inc: { read_num: 1 } })
       .populate({ path: 'author', select: 'username' })
       .exec()
-
     return result
   },
   favour: async (moment_id, uid) => {
@@ -95,7 +94,7 @@ module.exports = {
     }
     return result
   },
-  like: async (moment_id, from, to, recentlyMoment) => {
+  like: async (moment_id, from, to, recentlyMoment, notification) => {
     const Moment = mongoose.model('Moment')
     const User = mongoose.model('User')
     let updateMoment = {
@@ -109,33 +108,43 @@ module.exports = {
       },
       $inc: { like_num: 1 }
     }
+    let updateNotification = {
+      $push: {
+        "notifications": notification
+      },
+    }
     try {
       let moment = await Moment.findByIdAndUpdate(moment_id, updateMoment)
       let user = await User.findByIdAndUpdate(from, updateUser)
+      let updateTo = await User.findByIdAndUpdate(to, updateNotification)
       result = {
         moment_id: moment._id,
         like_num: moment.like_num,
         user: user._id
       }
+
     } catch (error) {
       return new Error(error)
     }
     return result
   },
-  cancelLike: async (moment_id, uid) => {
+  cancelLike: async (moment_id, from, to, recentlyMoment) => {
     const Moment = mongoose.model('Moment')
     const User = mongoose.model('User')
     let updateMoment = {
-      $pull: { like: uid },
+      $pull: { like: from },
       $inc: { like_num: -1 }
     }
     let updateUser = {
-      $pull: { "like.moment": moment_id },
+      $pull: { 
+        "like.moment": moment_id,
+        'recentlyMoments': recentlyMoment
+      },
       $inc: { like_num: -1 }
     }
     try {
       let moment = await Moment.findByIdAndUpdate(moment_id, updateMoment)
-      let user = await User.findByIdAndUpdate(uid, updateUser)
+      let user = await User.findByIdAndUpdate(from, updateUser)
       result = {
         moment_id: moment._id,
         like_num: moment.like_num,
