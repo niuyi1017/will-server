@@ -122,20 +122,23 @@ module.exports = {
     }
     return result
   },
-  cancelLike: async (moment_id, uid) => {
+  cancelLike: async (moment_id, from, to, recentlyMoment) => {
     const Moment = mongoose.model('Moment')
     const User = mongoose.model('User')
     let updateMoment = {
-      $pull: { like: uid },
+      $pull: { like: from },
       $inc: { like_num: -1 }
     }
     let updateUser = {
-      $pull: { "like.moment": moment_id },
+      $pull: { 
+        "like.moment": moment_id,
+        'recentlyMoments': recentlyMoment
+      },
       $inc: { like_num: -1 }
     }
     try {
       let moment = await Moment.findByIdAndUpdate(moment_id, updateMoment)
-      let user = await User.findByIdAndUpdate(uid, updateUser)
+      let user = await User.findByIdAndUpdate(from, updateUser)
       result = {
         moment_id: moment._id,
         like_num: moment.like_num,

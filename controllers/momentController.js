@@ -125,10 +125,9 @@ module.exports = {
     let code = 0
     let message = 'success'
     let result = {}
-    let { moment_id, uid } = ctx.request.body
-    console.log(moment_id, uid)
+    let { moment_id, from, to, recentlyMoment } = ctx.request.body
     try {
-      result = await momentService.cancelLike(moment_id, uid)
+      result = await momentService.cancelLike(moment_id, from, to, recentlyMoment)
       await next()
     } catch (error) {
       code = 1
