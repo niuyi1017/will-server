@@ -6,8 +6,12 @@ const commentSchema = new Schema({
     type: ObjectId,
     ref: 'User'
   },
+  
   content: String,
-
+  replyType:{
+    type:Number
+  },//0 ：同学圈，1：文章，2：回答
+  momentId: String,
   replys: [{
     from:{
       type: ObjectId,

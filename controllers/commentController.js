@@ -6,8 +6,9 @@ module.exports = {
     let result = {}
     let comment = ctx.request.body.comment
     let recentlyMoment = ctx.request.body.recentlyMoment
+    let notification = ctx.request.body.notification
     try {
-      result = await commentService.newComment(comment, recentlyMoment)
+      result = await commentService.newComment(comment, recentlyMoment, notification)
       await next()
     } catch (error) {
       code = 1

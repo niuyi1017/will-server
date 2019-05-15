@@ -36,13 +36,31 @@ module.exports = {
       .populate({path: 'author',select: ['avatar','username']})
       .exec()
 
-    //判断是否需要fellow按钮改为由客户端判断，登录后更新localStorage储存该用户的Follling
+    //判断是否需要follow按钮改为由客户端判断，登录后更新localStorage储存该用户的Follling
     return result
   },
   moment: async (moment_id) => {
     const Moment = mongoose.model('Moment')
     let result = await Moment.findByIdAndUpdate(moment_id, { $inc: { read_num: 1 } })
-      .populate({ path: 'author', select: 'username' })
+      .populate({ 
+        path: 'author', select: ['username','avatar'],
+       })
+      .populate({
+        path: 'comments', 
+        select: ['author', 'content', 'replys', 'like_num','meta'],
+        populate: {
+          path:'author',
+          select:['username','avatar']
+        }
+      })
+      .populate({
+        path: 'comments.replys',
+        select: ['from', 'to'],
+        populate: {
+          path: 'from',
+          select: ['username', 'to']
+          },
+      })
       .exec()
     return result
   },
