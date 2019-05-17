@@ -51,17 +51,10 @@ module.exports = {
         populate: {
           path:'author',
           select:['username','avatar']
-        }
-      })
-      .populate({
-        path: 'comments.replys',
-        select: ['from', 'to'],
-        populate: {
-          path: 'from',
-          select: ['username', 'to']
-          },
-      })
+        }}
+      )
       .exec()
+    
     return result
   },
   favour: async (moment_id, uid) => {

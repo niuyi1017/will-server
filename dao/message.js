@@ -9,9 +9,6 @@ module.exports = {
       })
       .exec()
     let result = ret.notifications
-    result.sort((a, b) => {
-      return b.postTime > a.postTime
-    })
     return result
   }
 }
