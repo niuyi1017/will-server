@@ -13,14 +13,8 @@ const commentSchema = new Schema({
   },//0 ：同学圈，1：文章，2：回答
   momentId: String,
   replys: [{
-    from:{
-      type: ObjectId,
-      ref: 'User'
-    },
-    to: {
-      type: ObjectId,
-      ref: 'User'
-    },
+    from:{},
+    to: {},
     content: String
   }],
   

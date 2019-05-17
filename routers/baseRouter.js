@@ -57,11 +57,11 @@ router.post('/moment',jwt,momentController.newMoment)//发布同学圈
 router.get('/messages/notifications',messageController.notifications)
 
 router.post('/comment', commentController.newComment)
-
+router.post('/comment/reply', commentController.newReply)
 //school 
 router.get('/schools',schoolController.schools)  //学校列表
       .get('/schools/:school_id', schoolController.school)// id 简介
-      .get('/schools/:school_id/detail',jwt,schoolController.schoolDetail) //详情
+      .get('/schools/:school_id/detail',schoolController.schoolDetail) //详情
       .get('/schools/:school_id/specials', schoolController.schoolSpecials) //开设专业
       .get('/schoolByRank',jwt, schoolController.getSchoolByRank) //根据位次选大学  todo test
       .get('/schoolByScore',jwt,schoolController.getSchoolByScore) //根据位次选大学

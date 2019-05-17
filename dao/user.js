@@ -31,6 +31,8 @@ module.exports = {
         result.match = match
         if(match){
           result.uid = _user._id
+          result.avatar = _user.avatar
+          result.username = _user.username
           result.following = _user.following
           result.recentlyMoments = _user.recentlyMoments
           result.like = _user.like,
