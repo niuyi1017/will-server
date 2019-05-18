@@ -7,7 +7,6 @@ module.exports = {
   },
   newReply: async (reply, recentlyMoment, notification) => {
     let result = await comment.newReply(reply, recentlyMoment, notification)
-    console.log(result,'service')
     return result
   },
 }

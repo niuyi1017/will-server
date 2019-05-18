@@ -4,7 +4,6 @@ module.exports = {
   newComment: async (_comment, recentlyMoment, notification) => {
     const Comment = mongoose.model('Comment')
     const User = mongoose.model('User')
-    
     let uid = _comment.author
     let result = {}
     try {
@@ -31,6 +30,15 @@ module.exports = {
       if (_comment.replyType == 0){
         const Moment = mongoose.model('Moment')
         moment = await Moment.findByIdAndUpdate(_comment.moment_id, updateMoment)//update moment
+        comments = await Moment.findById(_comment.moment_id)
+          .populate({
+            path: 'comments',
+            select: ['author', 'content', 'replys', 'like_num', 'meta'],
+            populate: {
+              path: 'author',
+              select: ['username', 'avatar']
+            }
+          }).exec()
       } else if (_comment.replyType == 1){
         const Article = mongoose.model('Article')
         moment = await Article.findByIdAndUpdate(_comment.moment_id, updateMoment)//update moment
@@ -38,9 +46,10 @@ module.exports = {
 
       let user = await User.findByIdAndUpdate(uid, updateUser)//update recentlyMoment
       let updateTo = await User.findByIdAndUpdate(moment.author, updateNotification) //update notification
+      
       result = {
         comment_id,
-        moment:moment._id,
+        comments:comments.comments,
         uid: user._id,
         updateTo: updateTo._id
       }
@@ -54,7 +63,7 @@ module.exports = {
     const Comment = mongoose.model('Comment')
     const User = mongoose.model('User')
     let {from, to, content, comment_id}  = _reply
-    // let result = { _reply}
+    console.log(from)
     try {
       let updateReplys = {
         $push: {
@@ -74,10 +83,12 @@ module.exports = {
       let comment = await Comment.findByIdAndUpdate(comment_id, updateReplys)
       let updateFrom = await User.findByIdAndUpdate(from.uid, updateUser)//update recentlyMoment
       let updateTo = await User.findByIdAndUpdate(to, updateNotification) //update notification
+      let _replys = await Comment.findById(comment_id)
       result = {
         comment_id: comment._id,
         from: updateFrom._id,
-        to: updateTo._id
+        to: updateTo._id,
+        replys: _replys.replys
       }
     } catch (error) {
       return new Error(error)
