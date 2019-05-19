@@ -83,7 +83,7 @@ module.exports = {
       message
     }
   },
-  getSchoolByRank: async (ctx, next) => {
+  getSchoolsByRank: async (ctx, next) => {
     let code = 0
     let message = 'success'
     let result = {}
@@ -91,7 +91,7 @@ module.exports = {
     let province_id = parseInt(ctx.request.query.province_id)
     let subject_id = parseInt(ctx.request.query.subject_id)
     try {
-      result = await schoolService.getSchoolByRank(rank, province_id, subject_id)
+      result = await schoolService.getSchoolsByRank(rank, province_id, subject_id)
       await next()
     } catch (error) {
       code = 1
@@ -103,15 +103,16 @@ module.exports = {
       message
     }
   },
-  getSchoolByScore: async (ctx, next) => {
+  getSchoolsByScore: async (ctx, next) => {
     let code = 0
     let message = 'success'
     let result = {}
     let score = parseInt(ctx.request.query.score)
     let province_id = parseInt(ctx.request.query.province_id)
     let subject_id = parseInt(ctx.request.query.subject_id)
+    // console.log(score,province_id,subject_id)
     try {
-      result = await schoolService.getSchoolByScore(score, province_id, subject_id )
+      result = await schoolService.getSchoolsByScore(score, province_id, subject_id )
       await next()
     } catch (error) {
       code = 1
