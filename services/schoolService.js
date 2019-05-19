@@ -18,12 +18,12 @@ module.exports = {
     let result = await school.specials(school_id)
     return result
   },
-  getSchoolByRank: async (rank, province_id, subject_id) => {
-    let result = await school.getSchoolByRank(rank, province_id, subject_id)
+  getSchoolsByRank: async (rank, province_id, subject_id) => {
+    let result = await school.getSchoolsByRank(rank, province_id, subject_id)
     return result
   },
-  getSchoolByScore: async (score, province_id, subject_id ) => {
-    let result = await school.getSchoolByScore(score, province_id, subject_id )
+  getSchoolsByScore: async (score, province_id, subject_id ) => {
+    let result = await school.getSchoolsByScore(score, province_id, subject_id )
     return result
   },
   allSchool: async () => {

@@ -78,7 +78,7 @@ function getSchoolSpecials(school_id,detail) {
   
 }
 // @Todo page
-function getSchoolByRank(rank, province_id, subject_id) {
+function getSchoolsByRank(rank, province_id, subject_id) {
   if (!province_id){
     province_id = 37
   }
@@ -111,7 +111,7 @@ function getSchoolByRank(rank, province_id, subject_id) {
   })
 }
 // @Todo page
-function getSchoolByScore(score, province_id, subject_id ) {
+function getSchoolsByScore(score, province_id, subject_id ) {
   if (!province_id) {
     province_id = 37
   }
@@ -170,12 +170,12 @@ module.exports = {
     let result = await getSchoolSpecials(school_id,true)
     return result
   },
-  getSchoolByRank: async (rank, province_id, subject_id) => {
-    let result = await getSchoolByRank(rank, province_id, subject_id)
+  getSchoolsByRank: async (rank, province_id, subject_id) => {
+    let result = await getSchoolsByRank(rank, province_id, subject_id)
     return result
   },
-  getSchoolByScore: async (score, province_id, subject_id ) => {
-    let result = await getSchoolByScore(score, province_id, subject_id )
+  getSchoolsByScore: async (score, province_id, subject_id ) => {
+    let result = await getSchoolsByScore(score, province_id, subject_id )
     return result
   },
 }
