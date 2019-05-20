@@ -6,6 +6,7 @@ const schoolController = require('../controllers/schoolController')
 const specialController = require('../controllers/specialController')
 const messageController = require('../controllers/messageController')
 const commentController = require('../controllers/commentController')
+const articleController = require('../controllers/articleController')
 
 const uploadController = require('../controllers/uploadController')
 const parseToken = require('../middlewares/parseToken')
@@ -25,7 +26,7 @@ router.post('/signUp', userController.signUp)
       .post('/signIn', userController.signIn)
       .get('/users', userController.users)
       .get('/user/:uid',jwt,userController.user)
-      .get('/userRecentlyMoments', userController.userRecentlyMoments)
+      .get('/userRecArticles', userController.userRecentlyMoments)
       .post('/user/follow', userController.userFollow)
 
 //question
@@ -53,6 +54,14 @@ router.post('/moment',jwt,momentController.newMoment)//发布同学圈
       .put('/moment/cancelFavour', jwt, momentController.cancelFavour)//取消收藏（uid，moment_id）
       .put('/moment/like', jwt, momentController.like)//点赞同学圈 （uid，moment_id）
       .put('/moment/cancelLike', jwt, momentController.cancelLike)//取消点赞（uid，moment_id）
+
+router.post('/article', articleController.newArticle)//发布同学圈
+      .get('/articles', articleController.articles) //文章列表
+      .get('/articles/:article_id', articleController.article) //文章详情
+      // .put('/article/favour', jwt, articleController.favour)//收藏文章 （uid，article_id）
+      // .put('/article/cancelFavour', jwt, articleController.cancelFavour)//取消收藏（uid，article_id）
+      // .put('/article/like', jwt, articleController.like)//点赞文章 （uid，article_id）
+      // .put('/article/cancelLike', jwt, articleController.cancelLike)//取消点赞（uid，article_id）
 
 router.get('/messages/notifications',messageController.notifications)
 

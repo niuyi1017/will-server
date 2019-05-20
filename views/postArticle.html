@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文章发布</title>
+  <style>
+  *{
+    margin: 0;
+    padding: 0
+  }
+  .header{
+    width: 100%;
+    height: 180px;
+    background: #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+  }
+  .header h1{
+    margin-bottom: 20px;
+    color: #495360;
+  }
+   .header .desc{
+    margin-bottom: 20px;
+    color: #808695;
+  }
+  .body{
+    padding: 50px 150px;
+    background: #fefefe
+  }
+  .body .item{
+    display: flex;
+    height: 50px;
+    line-height: 50px;
+    align-items: center;
+    justify-content: center
+  }
+  .body .item .title{
+    margin-right: 40px;
+    min-width: 40px;
+  }
+  .body .item input{
+    height: 30px;
+    width: 80%;
+
+  }
+  .body #text{
+    width: 90%;
+    margin-left:5% 
+  }
+  .body .button-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .body .button-wrapper .button{
+    width: 350px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    background: #2db7f5;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 10px 50px #2db7f5;
+    cursor: pointer;
+  }
+  
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>文章发布</h1>
+    <div class="desc">WiLL,连接高中生和大学生的桥梁。</div>
+   
+  </div>
+  <div class="body">
+    <div class="item">
+      <div class="title">文章标题:</div>
+      <input type="text" id="title">
+    </div>
+    <div class="item">
+      <div class="title">文章封面:</div>
+      <input type="text" id="cover">
+    </div>
+    <div id="text">
+      <p>与世界 <b>分享</b> 你的经验......</p>
+    </div>
+
+    <div class="button-wrapper">
+      <div class="button">发布</div>
+    </div>
+  </div>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/wangeditor/release/wangEditor.min.js"></script>
+<script>
+  window.onload = function(){
+    var E = window.wangEditor
+    var editor = new E('#text')
+    editor.create()
+    
+
+    //http://prt246ayv.bkt.clouddn.com/post2.jpg
+    // 有海的地方，就是烟大的主场
+    // 烟台大学东门外就是大海，就连宿舍楼都是海景房。
+
+    // 烟大有十个餐厅，还有一个十一餐。
+
+    // 烟台大学每年都有一个九天的春假。
+
+    var post = document.querySelector('.button').addEventListener('click',function(){ 
+      let data = {
+        title : document.getElementById('title').value,
+        cover : document.getElementById('cover').value,
+        content : editor.txt.html(),
+        author : "5cd3ee88b4dbfb43bcce4483"
+      }
+      axios.post('/article',data).then(res => {
+        if(res.code==0&&res.data){
+          alert("发布成功！")
+        }
+      })
+    },false)
+  }
+</script>
+</html>

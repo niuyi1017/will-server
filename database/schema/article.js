@@ -7,19 +7,40 @@ const articleSchema = new Schema({
             type: ObjectId,
             ref: 'User'
           },
-  
+  cover: String,
   content: {
-    picList: [],
-    title: String, 
-    text: String
+    type: String
   },
-  // comments: [{
-  //   type: ObjectId,
-  //   ref: 'Comment'
-  // }],
-  read_num: Number,
-  like_num: Number,
-  favorite_num: Number,
+  comments: [{
+    type: ObjectId,
+    ref: 'Comment'
+  }],
+  favour_num: {
+    type: Number,
+    default: 0
+  },
+  read_num: {
+    type: Number,
+    default: 0
+  },
+  like_num: {
+    type: Number,
+    default: 0
+  },
+  favour: [
+    {
+      type: ObjectId,
+      ref: 'User',
+      unique: true
+    }
+  ],
+  like: [
+    {
+      type: ObjectId,
+      ref: 'User',
+      unique: true
+    }
+  ],
   meta: {
     createdAt: {
       type: Date,
@@ -34,10 +55,8 @@ const articleSchema = new Schema({
 
 articleSchema.pre('save', function (next) {
   if (this.isNew) {
-    console.log('isnew')
     this.meta.createdAt = this.meta.updatedAt = Date.now()
   } else {
-    console.log('!isnew')
     this.meta.updatedAt = Date.now()
   }
   next()

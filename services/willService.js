@@ -1,3 +1,4 @@
+const article = require('../dao/article')
 module.exports = {
   slideShows:  () => {
     let slideShows = [
@@ -44,7 +45,7 @@ module.exports = {
     ]
     return slideShows
   },
-  hotArticles: () => {
+  hotArticles: async() => {
     let hotArticles = [
       {
         "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
@@ -54,32 +55,10 @@ module.exports = {
         "comment": "123",
         "read": "3.4k"
       },
-      {
-        "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-        "author": "一只小小白",
-        "title": "在距海最近的大学读书是怎样的体验在距海最近的大学读书",
-        "like": "1234",
-        "comment": "123",
-        "read": "3.4k"
-      },
-      {
-        "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-        "author": "一只小小白",
-        "title": "在距海最近的大学读书是怎样的体验",
-        "like": "1234",
-        "comment": "123",
-        "read": "3.4k"
-      },
-      {
-        "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-        "author": "一只小小白",
-        "title": "在距海最近的大学读书是怎样的体验读书是怎样的体验",
-        "like": "1234",
-        "comment": "123",
-        "read": "3.4k"
-      }
     ]
-    return hotArticles
+    let result = await article.articles(0, 5)
+    return result
+    // return hotArticles
   },
   recommedArticles: (uid) => {
     let recommedArticles = []
