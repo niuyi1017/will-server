@@ -13,4 +13,12 @@ module.exports = {
     let result = await article.article(article_id)
     return result
   },
+  like: async (article_id, from, to, recentlyMoment, notification) => {
+    let result = await article.like(article_id, from, to, recentlyMoment, notification)
+    return result
+  },
+  cancelLike: async (article_id, from, to, recentlyMoment) => {
+    let result = await article.cancelLike(article_id, from, to, recentlyMoment)
+    return result
+  },
 }

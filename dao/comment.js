@@ -5,11 +5,13 @@ module.exports = {
     const Comment = mongoose.model('Comment')
     const User = mongoose.model('User')
     let uid = _comment.author
-    let result = {}
+    // let result = {}
+    
     try {
       let comment = new Comment(_comment)
       let savedComment = await comment.save()
       let comment_id = savedComment._id
+     
       let updateMoment = {
         $push: {
           "comments": comment_id
@@ -27,6 +29,7 @@ module.exports = {
       }
       //Todo switch replyType 
       let moment = null
+      let updateTo = null
       if (_comment.replyType == 0){
         const Moment = mongoose.model('Moment')
         moment = await Moment.findByIdAndUpdate(_comment.moment_id, updateMoment)//update moment
@@ -39,21 +42,32 @@ module.exports = {
               select: ['username', 'avatar']
             }
           }).exec()
+          updateTo = await User.findByIdAndUpdate(moment.author, updateNotification) //update notification
+
       } else if (_comment.replyType == 1){
-        const Article = mongoose.model('Article')
-        moment = await Article.findByIdAndUpdate(_comment.moment_id, updateMoment)//update moment
+          const Article = mongoose.model('Article')
+          article = await Article.findByIdAndUpdate(_comment.moment_id, updateMoment)//update moment
+          comments = await Article.findById(_comment.moment_id)
+            .populate({
+              path: 'comments',
+              select: ['author', 'content', 'replys', 'like_num', 'meta'],
+              populate: {
+                path: 'author',
+                select: ['username', 'avatar']
+              }
+            }).exec()
+        updateTo = await User.findByIdAndUpdate(article.author, updateNotification) //update notification
+
       }
 
       let user = await User.findByIdAndUpdate(uid, updateUser)//update recentlyMoment
-      let updateTo = await User.findByIdAndUpdate(moment.author, updateNotification) //update notification
-      
       result = {
         comment_id,
         comments:comments.comments,
         uid: user._id,
         updateTo: updateTo._id
       }
-      console.log(result)
+      console.log("result:", result)
     } catch (error) {
       return new Error(error)
     }

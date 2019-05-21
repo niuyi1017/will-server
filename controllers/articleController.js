@@ -63,4 +63,40 @@ module.exports = {
       message
     }
   },
+  like: async (ctx, next) => {
+    let code = 0
+    let message = 'success'
+    let result = {}
+    let { article_id, from, to, recentlyMoment, notification } = ctx.request.body
+    try {
+      result = await articleService.like(article_id, from, to, recentlyMoment, notification)
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
+    }
+    ctx.response.body = {
+      code,
+      data: result,
+      message
+    }
+  },
+  cancelLike: async (ctx, next) => {
+    let code = 0
+    let message = 'success'
+    let result = {}
+    let { article_id, from, to, recentlyMoment } = ctx.request.body
+    try {
+      result = await articleService.cancelLike(article_id, from, to, recentlyMoment)
+      await next()
+    } catch (error) {
+      code = 1
+      message = error.message
+    }
+    ctx.response.body = {
+      code,
+      data: result,
+      message
+    }
+  },
 }

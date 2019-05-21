@@ -60,8 +60,8 @@ router.post('/article', articleController.newArticle)//发布同学圈
       .get('/articles/:article_id', articleController.article) //文章详情
       // .put('/article/favour', jwt, articleController.favour)//收藏文章 （uid，article_id）
       // .put('/article/cancelFavour', jwt, articleController.cancelFavour)//取消收藏（uid，article_id）
-      // .put('/article/like', jwt, articleController.like)//点赞文章 （uid，article_id）
-      // .put('/article/cancelLike', jwt, articleController.cancelLike)//取消点赞（uid，article_id）
+      .put('/article/like', jwt, articleController.like)//点赞文章 （uid，article_id）
+      .put('/article/cancelLike', jwt, articleController.cancelLike)//取消点赞（uid，article_id）
 
 router.get('/messages/notifications',messageController.notifications)
 

@@ -7,9 +7,12 @@ module.exports = {
     let uid = _article.author
     let result = {}
     try {
+     
       let article = new Article(_article)
+      console.log(456)
       let savedArticle = await article.save()
       let article_id = savedArticle._id
+      console.log(123)
       let update = {
         $push: {
           "post.article": article_id
@@ -54,6 +57,67 @@ module.exports = {
       )
       .exec()
 
+    return result
+  },
+  like: async (article_id, from, to, recentlyMoment, notification) => {
+    const Article = mongoose.model('Article')
+    const User = mongoose.model('User')
+    let updateArticle = {
+      $push: { like: from },
+      $inc: { like_num: 1 }
+    }
+    let updateUser = {
+      $push: {
+        "like.article": article_id,
+        "recentlyMoments": recentlyMoment
+      },
+      $inc: { like_num: 1 }
+    }
+    let updateNotification = {
+      $push: {
+        "notifications": notification
+      },
+    }
+    try {
+      let article = await Article.findByIdAndUpdate(article_id, updateArticle)
+      let user = await User.findByIdAndUpdate(from, updateUser)
+      let updateTo = await User.findByIdAndUpdate(to, updateNotification)
+      result = {
+        article_id: article._id,
+        like_num: article.like_num,
+        user: user._id
+      }
+
+    } catch (error) {
+      return new Error(error)
+    }
+    return result
+  },
+  cancelLike: async (article_id, from, to, recentlyMoment) => {
+    const Article = mongoose.model('Article')
+    const User = mongoose.model('User')
+    let updateArticle = {
+      $pull: { like: from },
+      $inc: { like_num: -1 }
+    }
+    let updateUser = {
+      $pull: {
+        "like.article": article_id,
+        'recentlyMoments': recentlyMoment
+      },
+      $inc: { like_num: -1 }
+    }
+    try {
+      let article = await Article.findByIdAndUpdate(article_id, updateArticle)
+      let user = await User.findByIdAndUpdate(from, updateUser)
+      result = {
+        article_id: article._id,
+        like_num: article.like_num,
+        user: user._id
+      }
+    } catch (error) {
+      return new Error(error)
+    }
     return result
   },
 }
