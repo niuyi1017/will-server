@@ -1,159 +1,68 @@
 const article = require('../dao/article')
+const user = require('../dao/user')
+const special = require('../dao/special')
+const school = require('../dao/school')
+
 module.exports = {
   slideShows:  () => {
     let slideShows = [
       {
         "tag": "烟台大学",
-        "imgUrl": "http://blogpic.niuy.xyz/3.jpg",
+        "imgUrl": "http://prt246ayv.bkt.clouddn.com/%E7%A8%BF%E5%AE%9A%E8%AE%BE%E8%AE%A1%E5%AF%BC%E5%87%BA-20190521-205358.png",
         "title": "距海最近的大学 -- 烟台大学",
-        "read": "999",
-        "comment": "999+",
-        "heart": "999+"
       },
       {
         "tag": "烟台大学",
-        "imgUrl": "http://blogpic.niuy.xyz/3.jpg",
+        "imgUrl": "http://prt246ayv.bkt.clouddn.com/%E7%A8%BF%E5%AE%9A%E8%AE%BE%E8%AE%A1%E5%AF%BC%E5%87%BA-20190521-204445.png",
         "title": "距海最近的大学 -- 烟台大学",
-        "read": "999+",
-        "comment": "999",
-        "heart": "999+"
       },
       {
         "tag": "烟台大学",
-        "imgUrl": "http://blogpic.niuy.xyz/3.jpg",
+        "imgUrl": "http://prt246ayv.bkt.clouddn.com/%E7%A8%BF%E5%AE%9A%E8%AE%BE%E8%AE%A1%E5%AF%BC%E5%87%BA-20190521-204246.png",
         "title": "距海最近的大学 -- 烟台大学",
-        "read": "999+",
-        "comment": "999",
-        "heart": "999+"
       },
       {
         "tag": "烟台大学",
-        "imgUrl": "http://blogpic.niuy.xyz/3.jpg",
+        "imgUrl": "http://prt246ayv.bkt.clouddn.com/%E7%A8%BF%E5%AE%9A%E8%AE%BE%E8%AE%A1%E5%AF%BC%E5%87%BA-20190521-205224.png",
         "title": "距海最近的大学 -- 烟台大学",
-        "read": "999+",
-        "comment": "999+",
-        "heart": "999"
       },
       {
         "tag": "烟台大学",
-        "imgUrl": "http://blogpic.niuy.xyz/3.jpg",
+        "imgUrl": "http://prt246ayv.bkt.clouddn.com/%E7%A8%BF%E5%AE%9A%E8%AE%BE%E8%AE%A1%E5%AF%BC%E5%87%BA-20190521-204022.png",
         "title": "距海最近的大学 -- 烟台大学",
-        "read": "999+",
-        "comment": "999",
-        "heart": "999"
+      },
+      {
+        "tag": "烟台大学",
+        "imgUrl": "http://prt246ayv.bkt.clouddn.com/%E7%A8%BF%E5%AE%9A%E8%AE%BE%E8%AE%A1%E5%AF%BC%E5%87%BA-20190521-204938.png",
+        "title": "距海最近的大学 -- 烟台大学",
       }
+      
     ]
     return slideShows
   },
   hotArticles: async() => {
-    let hotArticles = [
-      {
-        "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-        "author": "一只小小白",
-        "title": "在距海最近的大学读书是怎样的体验",
-        "like": "1234",
-        "comment": "123",
-        "read": "3.4k"
-      },
-    ]
     let result = await article.articles(0, 5)
     return result
-    // return hotArticles
   },
-  recommedArticles: (uid) => {
-    let recommedArticles = []
-    if(uid){
-      recommedArticles = [
-        {
-          "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-          "author": "一只小小白",
-          "title": "在距海最近的大学读书是怎样的体验",
-          "like": "1234",
-          "comment": "123",
-          "read": "3.4k"
-        },
-        {
-          "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-          "author": "一只小小白",
-          "title": "在距海最近的大学读书是怎样的体验在距海最近的大学读书",
-          "like": "1234",
-          "comment": "123",
-          "read": "3.4k"
-        },
-        {
-          "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-          "author": "一只小小白",
-          "title": "在距海最近的大学读书是怎样的体验",
-          "like": "1234",
-          "comment": "123",
-          "read": "3.4k"
-        },
-        {
-          "imgUrl": "http://blogpic.niuy.xyz/2.jpg",
-          "author": "一只小小白",
-          "title": "在距海最近的大学读书是怎样的体验读书是怎样的体验",
-          "like": "1234",
-          "comment": "123",
-          "read": "3.4k"
-        }
-      ]
-    }else{
-      recommedArticles = []
-    }
-    return recommedArticles
-  },
-  recommendPeople: (uid) => {
-    let recommendPeople = []
-    if(uid){
-      recommendPeople = [
-        {
-          "avatar": "http://blogpic.niuy.xyz/t1.jpg",
-          "name": "一只小小白",
-          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-          "isFriend": false
-        },
-        {
-          "avatar": "http://blogpic.niuy.xyz/t2.jpg",
-          "name": "一只小小白",
-          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-          "isFriend": false
-        },
-        {
-          "avatar": "http://blogpic.niuy.xyz/t3.jpg",
-          "name": "一只小小白",
-          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-          "isFriend": false
-        },
-        {
-          "avatar": "http://blogpic.niuy.xyz/t1.jpg",
-          "name": "一只小小白",
-          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-          "isFriend": false
-        },
-        {
-          "avatar": "http://blogpic.niuy.xyz/t2.jpg",
-          "name": "一只小小白",
-          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-          "isFriend": false
-        },
-        {
-          "avatar": "http://blogpic.niuy.xyz/t3.jpg",
-          "name": "一只小小白",
-          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-          "isFriend": false
-        },
-        {
-          "avatar": "http://blogpic.niuy.xyz/t1.jpg",
-          "name": "一只小小白",
-          "desc": "与你均来自济北中学，就读于烟台大学物联网工程专业",
-          "isFriend": false
-        }
-      ]
-    }
-    else{
-      recommendPeople = []
-    }
+  recommendArticles: async(uid) => {
+    let recommendArticles = []
     
-    return recommendPeople 
+    let result = await article.articles(0, 5)
+    for(let i = result.length-1; i>=0;i--){
+      recommendArticles.push(result[i])
+    }
+    return recommendArticles
+  },
+  recommendPeople: async(uid) => {
+    let result = await user.users(0, 8)
+    return result
+  },
+  hotSchools: async(uid) => {
+    let result = await school.schools(0, 8)
+    return result
+  },
+  hotSpecials: async (uid) => {
+    let result = await special.specials(27, 10)
+    return result
   }
 }
