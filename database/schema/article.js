@@ -8,9 +8,7 @@ const articleSchema = new Schema({
             ref: 'User'
           },
   cover: String,
-  content: {
-    type: String
-  },
+  content: String,
   comments: [{
     type: ObjectId,
     ref: 'Comment'

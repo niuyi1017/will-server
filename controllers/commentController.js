@@ -7,7 +7,8 @@ module.exports = {
     let comment = ctx.request.body.comment
     let recentlyMoment = ctx.request.body.recentlyMoment
     let notification = ctx.request.body.notification
-    
+    // console.log(123,recentlyMoment)
+    // console.log(456,notification)
     try {
       result = await commentService.newComment(comment, recentlyMoment, notification)
       await next()
