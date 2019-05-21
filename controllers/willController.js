@@ -80,8 +80,10 @@ module.exports = {
       data = {
         slideShows: await willService.slideShows(),
         recommendPeople: await willService.recommendPeople(uid),
-        recommedArticles: await willService.recommedArticles(uid),
-        hotArticles: await willService.hotArticles()
+        recommendArticles: await willService.recommendArticles(uid),
+        hotArticles: await willService.hotArticles(),
+        hotSchools: await willService.hotSchools(),
+        hotSpecials: await willService.hotSpecials()
       }
       await next()
     } catch (error) {
