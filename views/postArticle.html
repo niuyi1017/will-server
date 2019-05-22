@@ -105,12 +105,6 @@
     
 
     //http://prt246ayv.bkt.clouddn.com/post2.jpg
-    // 有海的地方，就是烟大的主场
-    // 烟台大学东门外就是大海，就连宿舍楼都是海景房。
-
-    // 烟大有十个餐厅，还有一个十一餐。
-
-    // 烟台大学每年都有一个九天的春假。
 
     var post = document.querySelector('.button').addEventListener('click',function(){ 
       let data = {
@@ -120,7 +114,7 @@
         author : "5cd3ee88b4dbfb43bcce4483"
       }
       axios.post('/article',data).then(res => {
-        if(res.code==0&&res.data){
+        if(res.code==0){
           alert("发布成功！")
         }
       })

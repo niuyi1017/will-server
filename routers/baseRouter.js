@@ -64,6 +64,7 @@ router.post('/article', articleController.newArticle)//发布同学圈
       .put('/article/cancelLike', jwt, articleController.cancelLike)//取消点赞（uid，article_id）
 
 router.get('/messages/notifications',messageController.notifications)
+      .get('/messages/contacts', userController.users)
 
 router.post('/comment', commentController.newComment)
 router.post('/comment/reply', commentController.newReply)
