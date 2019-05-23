@@ -19,7 +19,7 @@ router.get('/slideShows', willController.slideShows)
       .get('/hotArticles', willController.hotArticles)
       .get('/recommendArticles', willController.recommendArticles)
       .get('/recommendPeople', willController.recommendPeople)
-      .get('/will', willController.will)
+      .get('/will',willController.will)
 
 //user page
 router.post('/signUp', userController.signUp)
@@ -31,16 +31,6 @@ router.post('/signUp', userController.signUp)
 
 //question
 router.post('/question',jwt, questionController.newQuestion)//发布问题
-      /**
-        {
-            "title": "烟台大学有那些隐藏美食？2",
-            "tag": "美食",
-            "author": "5cc30a5241050a12702cbb62",
-            "content": "求推荐美食",
-            "picUrls":[ "http://pq2z2mcsm.bkt.clouddn.com/test/fe/1.jpg",
-                      "http://pq2z2mcsm.bkt.clouddn.com/test/fe/2.jpg"]
-            }
-       */
       .get('/questions', questionController.questions) //问题列表
       .get('/questions/:question_id',jwt, questionController.question) //问题详情
       .put('/question/favour',jwt, questionController.favour)//收藏问题 （uid，question_id）
@@ -66,15 +56,15 @@ router.post('/article', articleController.newArticle)//发布同学圈
 router.get('/messages/notifications',messageController.notifications)
       .get('/messages/contacts', userController.users)
 
-router.post('/comment', commentController.newComment)
-router.post('/comment/reply', commentController.newReply)
+router.post('/comment',jwt, commentController.newComment)
+router.post('/comment/reply',jwt, commentController.newReply)
 //school 
 router.get('/schools',schoolController.schools)  //学校列表
       .get('/schools/:school_id', schoolController.school)// id 简介
       .get('/schools/:school_id/detail',schoolController.schoolDetail) //详情
       .get('/schools/:school_id/specials', schoolController.schoolSpecials) //开设专业
-      .get('/schoolsByRank',jwt, schoolController.getSchoolsByRank) //根据位次选大学  todo test
-      .get('/schoolsByScore',jwt,schoolController.getSchoolsByScore) //根据位次选大学
+      .get('/schoolsByRank', schoolController.getSchoolsByRank) //根据位次选大学  todo test
+      .get('/schoolsByScore',schoolController.getSchoolsByScore) //根据位次选大学
       .get('/allSchools',jwt, schoolController.allSchool)  //admin 爬取所有学校信息并写入数据库
 
 //special 
