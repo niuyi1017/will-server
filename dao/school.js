@@ -135,7 +135,7 @@ function getSchoolsByScore(score, province_id, subject_id ) {
     "uri": "gksjk/api/school/gufenlists"
   }
   return new Promise((resolve, reject) => {
-    axios.post(url, { headers, data })
+    axios.get(url, { headers, data })
       .then((res) => {
         return resolve(res.data.data.item)
       }).catch((err) => {
